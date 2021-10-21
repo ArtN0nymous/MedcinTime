@@ -1,0 +1,28 @@
+{
+  "name": "medcintime",
+  "version": "1.0.0",
+  "description": "Sitio web para llevar un control de medicamentos",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtN0nymous/MedcinTime.git"
+  },
+  "keywords": [
+    "Medicamentos",
+    "sitio",
+    "web",
+    "control"
+  ],
+  "author": "Oneyda Itzel Nuñez Leal, Jesus Ramon Valdez Torres, Jaime Alfonso Rivera Villar, Carlos Garcia, Ramiro Ramos, Jesus Alexis Peinado Cabrera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtN0nymous/MedcinTime/issues"
+  },
+  "homepage": "https://github.com/ArtN0nymous/MedcinTime#readme",
+  "dependencies": {
+    "bootstrap-icons": "^1.6.1"
+  }
+}
