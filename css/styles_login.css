@@ -307,3 +307,9 @@ input[type=email], input[type=password] {
 .label {
     font-size: 30px;
 }
+
+#register{
+    font-size: x-large;
+    font-weight: bold;
+    color: rgba(0,142,165,255);
+}
