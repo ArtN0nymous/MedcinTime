@@ -3,16 +3,25 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+h1{
+	font-size: 40px;
+	text-align: center;
+	padding-block-end: 2%;
+}
 
+label{
+	font-family: "Poppins", sans-serif;
+	font-size: 200%;
+}
 
 .form-register {
-	width: 500px;
+	width: 70%;
 	background: #3b83bd;
 	padding: 40px;
 	margin: auto;
 	margin-top: 100px;
 	border-radius: 4px;
-	font-family: 'calibri';
+	font-family: "Poppins", sans-serif;
 	color: white;
 	box-shadow: 7px 13px 37px #000;
 }
@@ -21,20 +30,28 @@
 	margin-bottom: 20px;
 }
 .controls {
-	width: 45%;
+	width: 98%;
 	background: #e1e9f4;
 	padding: 4px;
 	border-radius: 4px;
 	margin-bottom: 5px;
 	border: 2px solid #146ca4;
-	font-family: 'calibri';
-	font-size: 13px;
+	font-family: "Poppins", sans-serif;
+	font-size: 30px;
 
 }
+.controles{
+	width: 99%;
+	/*background-color: rgb(81, 155, 168);*/
+}
+input[type=checkbox] {
+	transform: scale(2);
+	margin-right: 3%;
+  }
 .form-register p {
     height: 40px;
     text-align: center;	
-    font-size: 18px;
+    font-size: 30px;
     line-height: 30px;
 }
 
@@ -55,6 +72,19 @@
     padding: 15px;
     color: white;
     margin: 16px 0;
-    font-size: 16px;
+    font-size: 30px;
+}
+.regist{
+	margin-top: 20px;
+	text-align: center;
+}
+#btnregistrar{
+	font-size: 30px;
+	margin-block-end: 30px;
+}
+#ver{
+	font-size: 30px;
+	font-weight: bold;
+	color:white;
 }
 
