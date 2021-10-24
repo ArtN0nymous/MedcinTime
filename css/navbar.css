@@ -32,7 +32,7 @@ header nav ul li {
 }
 
 header nav ul li a {
-	color:#fff;
+	color: #FFFFFA;
 	padding:20px;
 	display:block;
 	text-decoration:none;
@@ -57,13 +57,26 @@ section {
 		left:-100%;
 		margin:0;
 		position: fixed;
-	
+		background-color: #FFFFFA;
 	}
-
+	.dropdown_menu{
+		background-color: #FFFFFA;
+		padding-bottom: 70vh;
+		border: 1px solid grey;
+		-webkit-box-shadow: 6px 17px 24px 5px rgba(0,0,0,0.59);
+		-moz-box-shadow: 6px 17px 24px 5px rgba(0,0,0,0.59);
+		box-shadow: 6px 17px 24px 5px rgba(0,0,0,0.59);
+	}
+	header nav ul li a {
+		color:  black;
+		padding:20px;
+		display:block;
+		text-decoration:none;
+	}
 	header nav ul li {
 		display:block;
 		float:none;
-		border-bottom:1px solid rgba(255,255,255, .3);
+		border-bottom:1px solid;
 	}
 
 	.menu_bar {
