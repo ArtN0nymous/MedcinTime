@@ -80,7 +80,22 @@ firebase.initializeApp({
     }
   }
 
-
+function Acceder(){
+    var email = $("#email").val();
+    var password = $("#password").val();
+    firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    alert("Bienvenido a MedcinTime !" + user);
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert("Correo o contraseña incorrecta"+ errorMessage);
+  });
+}
 
 
 
