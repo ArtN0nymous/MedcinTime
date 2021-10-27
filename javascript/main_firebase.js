@@ -9,7 +9,7 @@ firebase.initializeApp({
   });
   
   var db = firebase.firestore();
-  firebase.auth().languageCode = 'it';
+  //firebase.auth().languageCode = 'it';
   var provider = new firebase.auth.GoogleAuthProvider();
   //var analitycs = firebase.analitycs();
   //REGITRO
@@ -106,12 +106,11 @@ function AccesoGoogle(){
   .then((result) => {
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
-
     // This gives you a Google Access Token. You can use it to access the Google API.
     var token = credential.accessToken;
     // The signed-in user info.
     var user = result.user;
-    
+    debugger
     alert("Bienvenido a MedcinTime: " + user);
   }).catch((error) => {
     // Handle Errors here.
