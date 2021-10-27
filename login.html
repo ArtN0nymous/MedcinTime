@@ -12,7 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/styles_login.css">
+    <link rel="stylesheet" href="/css/register.css">
     <script src="/javascript/jquery-latest.js"></script>
+    <script src="/javascript/app.js"></script>
 </head>
 <body>
     <div class="wrapper fadeInDown">
@@ -26,7 +28,7 @@
                 <input type="button" class="fadeIn fourth" value="Iniciar Sesión" onclick="Acceder()">
                 <div id="gSignInWrapper">
                     <span class="label">Iniciar con:</span><br>
-                    <button class="btn btn-light" id="btnGoogle"></button>
+                    <button class="btn btn-light" id="btnGoogle" onclick="AccesoGoogle()"></button>
                 </div>
                     
             </form>
@@ -35,10 +37,69 @@
                 <a class="underlineHover" href="#">Olvidaste tu contraseña?</a>
                 <div class="form-inline">
                     <a>Eres nuevo?</a>
-                    <a class="underlineHover" href="register.html" id="register">Registrate !</a>
+                    <a class="underlineHover" id="register" onclick="ModalRegist()">Registrate !</a>
                 </div>
             </div>
 
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-titl">Registro</h1>
+            <img src="/img/MedcinTime_LOGO.png" id="modalIcon" alt="MedcinTime" />
+            </div>
+            <div class="modal-body">
+                <section class="form-register">
+                    <h1>FORMULARIO DE REGISTRO</h1>
+                    <div class="controles">
+                        <div class="col-lg">
+                            <h2>Usuario</h2>
+                            <label>Correo electronico:</label><br>
+                            <input class="controls" type="email" name="emailR" id="emailR" placeholder="Ingrese su email"><br>
+                            <label>Contraseña: <button class="btn btn-info" id="ver" onclick="Mostrar()">Ver</button></label><br>
+                            <input class="controls" type="password" name="passwordR" id="passwordR" placeholder="Ingrese una contraseña"><br>
+                            <label>Repita su contraseña:</label><br>
+                            <input class="controls" type="password" name="password_vf" id="password_vf" placeholder="Repita su contraseña">
+                        </div>
+                        <br>
+                        <div class="col-lg">
+                            <h2>Información</h2>
+                            <label>Nombre(s):</label><br>
+                            <input class="controls" type="text" name="nombre(s)" id="nombre(s)" placeholder="Ingrese su(s) nombre(s)"><br>
+                            <label>Apellido Paterno:</label><br>
+                            <input class="controls" type="text" name="apellido paterno" id="apellido paterno" placeholder="Ingrese su apellido paterno"><br>
+                            <label>Apellido Materno:</label><br>
+                            <input class="controls" type="text" name="apellido materno" id="apellido materno" placeholder="Ingrese su apellido materno"><br>
+                            <label>Edad:</label><br>
+                            <input class="controls" type="number" name="edad" id="edad" placeholder="Ingrese su edad">
+                            <label>Fecha de nacimiento:</label><br>
+                            <input class="controls" type="date" name="fecha de nacimiento" id="fecha de nacimiento"><br>
+                            <label>Sexo:</label><br>
+                            <select class="controls" id="sexo" placeholder="Seleccione su sexo">
+                                <option value="">Seleccione su sexo...</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select><br>
+                            <label>Direccion:</label><br>
+                            <input class="controls" type="text" name="direccion" id="direccion" placeholder="Ingrese su direccion"><br>
+                            <label>Código postal: </label>
+                            <input class="controls" type="text" name="CP" id="CP" placeholder="Ingrese su CP">
+                        </div>
+                    </div>
+                <div class="regist">
+                    <p><input type="checkbox" id="terminos">Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p><br>
+                <p><a href="#" onclick="OcultarModal()">¿Ya tengo cuenta?</a></p>
+                </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal()">Cancelar</button>
+            <button type="button" class="btn btn-primary modalRegistro" id="btnregistrar" onclick="Registro()">Registrarse</button>
+            </div>
+        </div>
         </div>
     </div>
     <script src="/javascript/main_firebase.js"></script>

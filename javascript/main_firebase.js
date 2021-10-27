@@ -9,14 +9,16 @@ firebase.initializeApp({
   });
   
   var db = firebase.firestore();
+  firebase.auth().languageCode = 'it';
+  var provider = new firebase.auth.GoogleAuthProvider();
   //var analitycs = firebase.analitycs();
   //REGITRO
   function Registro(){
     //,nombre, apellidoP, apellidoM,edad,fechaNa, sexo,direcc, cp,termnadcont
 
     //datos
-    var email = $("#email").val();
-    var pass = $("#password").val();
+    var email = $("#emailR").val();
+    var pass = $("#passwordR").val();
     var pass2 = $("#password_vf").val();
 
     var correo = false;
@@ -52,15 +54,15 @@ firebase.initializeApp({
                 }
             }
         }else{
-            $("#password").val("");
+            $("#passwordR").val("");
             $("#password_vf").val("");
             $("#password").focus();
             alert("Verifique su contraseña: al menos 10 caracteres");
         }
     }else{
-        $("#email").val("");
-        $("#email").attr('placeholder','Correo no valido');
-        $("#email").focus();
+        $("#emailR").val("");
+        $("#emailR").attr('placeholder','Correo no valido');
+        $("#emailR").focus();
         //$("email").attr('style','#placeholder{color:red;}');
     }
   }
@@ -79,7 +81,6 @@ firebase.initializeApp({
         return false; 
     }
   }
-
 function Acceder(){
     var email = $("#email").val();
     var password = $("#password").val();
@@ -97,6 +98,30 @@ function Acceder(){
   });
 }
 
+function AccesoGoogle(){
+    firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    
+    alert("Bienvenido a MedcinTime: " + user);
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    alert("Error al iniciar accder: " + errorCode + " " + errorMessage);
+  });
+}
 
 
 

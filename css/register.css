@@ -15,11 +15,10 @@ label{
 }
 
 .form-register {
-	width: 70%;
+	width: 90%;
 	background: #3b83bd;
 	padding: 40px;
 	margin: auto;
-	margin-top: 100px;
 	border-radius: 4px;
 	font-family: "Poppins", sans-serif;
 	color: white;
@@ -78,7 +77,7 @@ input[type=checkbox] {
 	margin-top: 20px;
 	text-align: center;
 }
-#btnregistrar{
+.modalRegistro{
 	font-size: 30px;
 	margin-block-end: 30px;
 }
@@ -86,5 +85,8 @@ input[type=checkbox] {
 	font-size: 30px;
 	font-weight: bold;
 	color:white;
+}
+#modalIcon{
+	width: 7%;
 }
 
