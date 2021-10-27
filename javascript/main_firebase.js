@@ -42,6 +42,8 @@ firebase.initializeApp({
                     .then((userCredential) => {
                         // Signed in
                         var user = userCredential.user;
+                        //$("#modalRegistro").modal('hide');
+                        window.location.href = "../index.html";
                         //alert("Bienvenido a MedcinTime: ",user);
                         // ...
                     })
