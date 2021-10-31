@@ -4,43 +4,48 @@
 	box-sizing: border-box;
 }
 h1{
-	font-size: 40px;
+	font-size: 175%;
 	text-align: center;
 	padding-block-end: 2%;
 }
 
 label{
 	font-family: "Poppins", sans-serif;
-	font-size: 200%;
+	font-size: 100%;
 }
 
 .form-register {
-	width: 90%;
+	width: 98%;
 	background: #3b83bd;
-	padding: 40px;
+	padding: 0.7%;
 	margin: auto;
-	border-radius: 4px;
+	border-radius: 0.40em;
 	font-family: "Poppins", sans-serif;
 	color: white;
-	box-shadow: 7px 13px 37px #000;
+	box-shadow: 0.4375em 0.8125em 2.31255em #000;
 }
 .form-register h4 {
-	font-size: 22px;
-	margin-bottom: 20px;
+	font-size: 1.375em;
+	/*margin-bottom: 1.25em;*/
 }
 .controls {
-	width: 98%;
+	width: 99%;
 	background: #e1e9f4;
-	padding: 4px;
-	border-radius: 4px;
-	margin-bottom: 5px;
-	border: 2px solid #146ca4;
+	/*padding: 0.25em;*/
+	border-radius: 0.25em;
+	margin-bottom: 0.3125em;
+	border: 0.125em solid #146ca4;
 	font-family: "Poppins", sans-serif;
-	font-size: 30px;
-
+	font-size: 175%;
+}
+#emailR,#passwordR,#password_vf{
+	font-size: 175%;
+	width: 98%;
+	padding:0.7%;
+	margin: 0.7%;
 }
 .controles{
-	width: 99%;
+	width: 100%;
 	/*background-color: rgb(81, 155, 168);*/
 }
 input[type=checkbox] {
@@ -48,10 +53,9 @@ input[type=checkbox] {
 	margin-right: 3%;
   }
 .form-register p {
-    height: 40px;
+    height: 1em;
     text-align: center;	
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 150%;
 }
 
 .form-register a {
@@ -68,25 +72,27 @@ input[type=checkbox] {
     width: 100%;
     background: #1f53c5;
     border: none;	
-    padding: 15px;
+    /*padding: 0.9375em;*/
     color: white;
-    margin: 16px 0;
-    font-size: 30px;
+    /*margin: 1em 0;*/
+    font-size: 175%;
 }
 .regist{
-	margin-top: 20px;
+	margin-top: 0em;
 	text-align: center;
 }
 .modalRegistro{
-	font-size: 30px;
-	margin-block-end: 30px;
+	font-size: 1.875em;
+	margin-block-end: 0em;
 }
 #ver{
-	font-size: 30px;
+	font-size: 175%;
 	font-weight: bold;
 	color:white;
+	padding-top: 0%;
+	padding-block-end:0% ;
 }
 #modalIcon{
-	width: 7%;
+	width: 4em;
 }
 
