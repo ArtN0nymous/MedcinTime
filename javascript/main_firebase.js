@@ -7,15 +7,33 @@ firebase.initializeApp({
     appId: "1:649910524760:web:bab6441580aca7f09f232d",
     measurementId: "G-G39L8GGKRL"
   });
-  
+  //referencias e instancias de Firebase
   var db = firebase.firestore();
-  //firebase.auth().languageCode = 'it';
+  firebase.auth().languageCode = 'it';
   var provider = new firebase.auth.GoogleAuthProvider();
+  var storageRef = "";
   //var analitycs = firebase.analitycs();
+  var user_uid = "";
+  //Verificar usuario inicia sesion
+  $(document).ready(function(){
+    verificar_loggedIn();
+  });
+  function verificar_loggedIn(){
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User logged in already or has just logged in.
+          user_uid = user.uid;
+          storageRef = firebase.storage().ref("Medicamentos_"+user_uid);
+          //alert("usuario: " + user.uid);
+        } else {
+          // User not logged in or has just logged out.
+          window.location.href = "../login.html";
+        }
+      });
+  }
   //REGITRO
   function Registro(){
     //,nombre, apellidoP, apellidoM,edad,fechaNa, sexo,direcc, cp,termnadcont
-
     //datos
     var email = $("#emailR").val();
     var pass = $("#passwordR").val();
@@ -41,11 +59,18 @@ firebase.initializeApp({
                     firebase.auth().createUserWithEmailAndPassword(email, pass)
                     .then((userCredential) => {
                         // Signed in
-                        var user = userCredential.user;
+                        var user = userCredential.user.uid;
                         //$("#modalRegistro").modal('hide');
-                        window.location.href = "../index.html";
-                        //alert("Bienvenido a MedcinTime: ",user);
-                        // ...
+                        db.collection("users").add({
+                            usuario: user,
+                            mail: email
+                        })
+                        .then((docRef) => {
+                            window.location.href = "../index.html";
+                        })
+                        .catch((error) => {
+                            alert("Error adding document: ", error);
+                        });
                     })
                     .catch((error) => {
                         var errorCode = error.code;
@@ -89,7 +114,7 @@ function Acceder(){
     firebase.auth().signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in
-    var user = userCredential.user;
+    var user = userCredential.user.uid;
     alert("Bienvenido a MedcinTime !" + user);
     // ...
   })
@@ -98,6 +123,13 @@ function Acceder(){
     var errorMessage = error.message;
     alert("Correo o contraseña incorrecta"+ errorMessage);
   });
+}
+function Cerrar_sesion(){
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        // An error happened.
+      });
 }
 
 function AccesoGoogle(){
@@ -109,7 +141,7 @@ function AccesoGoogle(){
     // This gives you a Google Access Token. You can use it to access the Google API.
     var token = credential.accessToken;
     // The signed-in user info.
-    var user = result.user;
+    var user = result.user.uid;
     debugger
     alert("Bienvenido a MedcinTime: " + user);
   }).catch((error) => {
@@ -124,28 +156,56 @@ function AccesoGoogle(){
   });
 }
 
-
-
-  /*//Guardar Datos
-function Guardar(){
-    db.collection("users").add({
-        nombre: document.getElementById('nombre').value,
-        apellido: document.getElementById('apellido').value,
-        edad: document.getElementById('edad').value,
-        tmovil: document.getElementById('tmovil').value
+//Guardar
+function Guardar_Perfil(){
+    db.collection("userP_"+user_uid).add({
+        nombre: $("#").val(),
+        apellido: $("#").val(),
+        edad: $("#").val(),
+        tmovil: $("#").val()
     })
     .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-        document.getElementById('nombre').value="";
-        document.getElementById('apellido').value="";
-        document.getElementById('edad').value="";
-        document.getElementById('tmovil').value="";
+        alert("Perfil actualizado");
     })
     .catch((error) => {
         console.error("Error adding document: ", error);
     });
 }
+//Medicamentos
+function Guardar_M(){
+    var fecha_esp = "";
+    if($("#Fecha_esp").is(':checked')) {
+        fecha_esp =  $("#fecha_input").val();
+    } else {
+        fecha_esp = "none";
+    }
+    db.collection("userM_"+user_uid).add({
+        medicamento: $("#medicamento").val(),
+        dosis: $("#dosis").val(),
+        fecha_esp: fecha_esp,
+        cada: $("#tiempo").val(),
+        medida: $("#medida").val()
+    })
+    .then((docRef) => {
+        selectIMG();
+        subir_img();
+        alert("Medicamento Guardado correctamente");
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+}
+//subir imagen
+function subir_img(){
+    var file = selectIMG();
+    storageRef.child('Imagenes/').put(file).then(function(snapshot){
+        alert("Exitoso!");
+    }).catch((error)=>{
+        alert("error: " + error);
+    });
+}
 
+  /*
 //Eliminar documento
 function Borrar(id){
     db.collection("users").doc(id).delete().then(function(){
