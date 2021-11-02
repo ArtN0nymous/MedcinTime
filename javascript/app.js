@@ -1,3 +1,6 @@
+$(document).ready(function(){
+    document.getElementById('fecha_input').style.display = "none";
+  });
 function ModalRegist(){
     $('#modalRegistro').modal({backdrop: 'static', keyboard: false});
     $("#modalRegistro").modal('show');
@@ -36,5 +39,6 @@ function selectIMG(){
             document.querySelector("#img").src=file;
         }
     }
+    //regresa la uri del archivo original no la del canvas
     return file;
 }

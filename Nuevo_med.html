@@ -48,10 +48,11 @@
                     <i class="fa-ico icon-upload-alt margin-correction"></i>
                 </label>
             </span>
-            <input id="file_selector" type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" onchange="subir_img()">
+            <input id="file_selector" type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" onchange="subir_img();">
             <img id="img" src="img/picture_icon.png" width="500">
+            <input type="hidden" id="url_imagen">
         </div>
-        <button class="btn btn-info" onclick="Guardar_R()">Guardar</button>
+        <button class="btn btn-info" onclick="Guardar_M()">Guardar</button>
         <button class="btn btn-danger" onclick="Cerrar_sesion()">Salir</button>
     </div>
     <script src="javascript/main_firebase.js"></script>

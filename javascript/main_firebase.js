@@ -13,6 +13,7 @@ firebase.initializeApp({
   var provider = new firebase.auth.GoogleAuthProvider();
   var storageRef = "";
   //var analitycs = firebase.analitycs();
+  //variables publicas
   var user_uid = "";
   //Verificar usuario inicia sesion
   $(document).ready(function(){
@@ -173,6 +174,8 @@ function Guardar_Perfil(){
 }
 //Medicamentos
 function Guardar_M(){
+    verificar_loggedIn();
+    var url = $("#url_imagen").val();
     var fecha_esp = "";
     if($("#Fecha_esp").is(':checked')) {
         fecha_esp =  $("#fecha_input").val();
@@ -184,22 +187,26 @@ function Guardar_M(){
         dosis: $("#dosis").val(),
         fecha_esp: fecha_esp,
         cada: $("#tiempo").val(),
-        medida: $("#medida").val()
+        medida: $("#medida").val(),
+        url: url
     })
     .then((docRef) => {
-        selectIMG();
-        subir_img();
         alert("Medicamento Guardado correctamente");
     })
     .catch((error) => {
-        console.error("Error adding document: ", error);
+        alert("Error adding document: ", error);
     });
 }
 //subir imagen
 function subir_img(){
     var file = selectIMG();
-    storageRef.child('Imagenes/').put(file).then(function(snapshot){
-        alert("Exitoso!");
+    var url = "";
+    storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
+        //alert("Exitoso!");
+        snapshot.ref.getDownloadURL().then(function(imgurl){
+            url = imgurl;
+            document.getElementById('url_imagen').value=url;
+        });
     }).catch((error)=>{
         alert("error: " + error);
     });
