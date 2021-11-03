@@ -25,12 +25,16 @@ firebase.initializeApp({
           // User logged in already or has just logged in.
           user_uid = user.uid;
           storageRef = firebase.storage().ref("Medicamentos_"+user_uid);
+          if(document.getElementById('usuario_medicamentos')){
+            document.getElementById('usuario_medicamentos').value=user_uid;
+            leerdatosMed();
+          }
           //alert("usuario: " + user.uid);
         } else {
           // User not logged in or has just logged out.
           window.location.href = "../login.html";
         }
-      });
+    });
   }
   //REGITRO
   function Registro(){
@@ -176,18 +180,19 @@ function Guardar_Perfil(){
 function Guardar_M(){
     verificar_loggedIn();
     var url = $("#url_imagen").val();
-    var fecha_esp = "";
+    var fecha_regist = "";
     if($("#Fecha_esp").is(':checked')) {
-        fecha_esp =  $("#fecha_input").val();
+        fecha_regist =  $("#fecha_input").val();
     } else {
-        fecha_esp = "none";
+        fecha_regist = new Date();
+        fecha_regist = fecha_regist.getDate() + "/" + (fecha_regist.getMonth() +1) + "/" + fecha_regist.getFullYear();
     }
     db.collection("userM_"+user_uid).add({
         medicamento: $("#medicamento").val(),
         dosis: $("#dosis").val(),
-        fecha_esp: fecha_esp,
-        cada: $("#tiempo").val(),
-        medida: $("#medida").val(),
+        contenido: $("#contenido").val() + " " + $("#dosis").val(),
+        contenido_unidad: $("#contenido_u").val() + " " + $("#dosis_u").val(),
+        fecha_regist: fecha_regist,
         url: url
     })
     .then((docRef) => {
@@ -211,7 +216,32 @@ function subir_img(){
         alert("error: " + error);
     });
 }
-
+//Leer Datos
+function leerdatosMed(){
+    //verificar_loggedIn();
+    var usuario = document.getElementById('usuario_medicamentos').value;
+    var tabla = document.getElementById('tabla_body');
+    db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
+        tabla.innerHTML = '';
+        querySnapshot.forEach((doc)=>{
+        tabla.innerHTML+=`
+            <tr style="background-color: rgb(163, 223, 148);">
+                <td scope='row'>${doc.id}</td>
+                <td>${doc.data().medicamento}</td>
+                <td>${doc.data().contenido}</td>
+                <td>${doc.data().dosis}</td>
+                <td>${doc.data().contenido_unidad}</td>
+                <td><img id="img" src="${doc.data().url}" width="250"></td>
+                <td>
+                <a class="btn btn-danger" id="eliminar" onclick="Borrar('${doc.id}')" data-toggle="Eliminar" title="Eliminar">
+                <i class="fas fa-trash"></i></a>
+                <a class="btn btn-warning" onclick="Editar('${doc.id}','${doc.data().medicamento}','${doc.data().dosis}','${doc.data().contenido_unidad}','${doc.data().url}');" data-toggle="Editar" title="Editar">
+                <i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>`                 
+        });
+    });
+}
   /*
 //Eliminar documento
 function Borrar(id){
@@ -249,26 +279,4 @@ function Update(){
         alert("Error: "+ error);
     });
 }
-
-//Leer Datos
-var tabla = document.getElementById('tabla');
-db.collection("users").onSnapshot((querySnapshot)=>{
-    tabla.innerHTML = '';
-    querySnapshot.forEach((doc)=>{
-    tabla.innerHTML+=`
-        <tr style="background-color: rgb(163, 223, 148);">
-            <td scope='row'>${doc.id}</td>
-            <td>${doc.data().nombre}</td>
-            <td>${doc.data().apellido}</td>
-            <td>${doc.data().edad}</td>
-            <td>${doc.data().tmovil}</td>
-            <td>
-            <a class="btn btn-danger" id="eliminar" onclick="Borrar('${doc.id}')" data-toggle="Eliminar" title="Eliminar">
-            <i class="fas fa-trash"></i></a>
-            <a class="btn btn-warning" onclick="Editar('${doc.id}','${doc.data().nombre}','${doc.data().apellido}','${doc.data().edad}','${doc.data().tmovil}');" data-toggle="Editar" title="Editar">
-            <i class="fas fa-pencil-alt"></i></a>
-            </td>
-        </tr>`
-                        
-    });
-});*/
+*/

@@ -20,6 +20,8 @@
         <iv class="form-control">
             <labe>Medicamento:</labe>
             <input id="medicamento" placeholder="Medicamento" required="required"></input>
+            <label>Contenido Neto: </label>
+            <input type="number" id="contenido">
             <label>Dosis:</label>
             <select id="dosis" required="required">
                 <option selected="true" value="">Seleccione una medida...</option>
@@ -34,15 +36,25 @@
                 <option value="Cucharadita">Cucharadita</option>
                 <option value="Cucharada">Cucharada</option>
             </select>
+            <label>Contenido por unidad: </label>
+            <input type="number" id="contenido_u">
+            <select id="dosis_u" required="required">
+                <option selected="true" value="">Seleccione una medida...</option>
+                <option value="ml">ml</option>
+                <option value="mg">mg</option>
+                <option value="µg">µg</option>
+                <option value="Tabletas">Tabletas</option>
+                <option value="Parches">Parches</option>
+                <option value="g">g</option>
+                <option value="Cápsulas">Cápsulas</option>
+                <option value="Ampolleta_ampula">Ampolleta o Ámpula</option>
+                <option value="Cucharadita">Cucharadita</option>
+                <option value="Cucharada">Cucharada</option>
+            </select>
         </iv>
         <div class="form-control">
-            <label>Seleccionar una fecha especifica <input type="checkbox" onchange="Fecha_esp()" name="checkbox"id="Fecha_esp"></label>
+            <label>Seleccionar una fecha de registro (Fecha actual): <input type="checkbox" onchange="Fecha_esp()" name="checkbox"id="Fecha_esp"></label>
             <input type="datetime-local" id="fecha_input">
-            <label>Cada: <input type="number" id="tiempo"> <select id="medida">
-                <option value="H" selected="true">Hora(s)</option>
-                <option value="D">Dia(s)</option>
-                <option value="S">Semana(s)</option>
-            </select></label>
             <span id="file_selector_span">
                 <label>Imagen:
                     <i class="fa-ico icon-upload-alt margin-correction"></i>

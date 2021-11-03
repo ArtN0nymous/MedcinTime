@@ -1,5 +1,8 @@
 $(document).ready(function(){
-    document.getElementById('fecha_input').style.display = "none";
+    if(document.getElementById('fecha_input')){
+        document.getElementById('fecha_input').style.display = "none";
+    }
+    verificar_loggedIn();
   });
 function ModalRegist(){
     $('#modalRegistro').modal({backdrop: 'static', keyboard: false});
