@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tarjetas</title>
+	<link rel="stylesheet" href="css/cards.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="navbarContainer" ></div>
+
+	<div class="container" id="container-cards">
+		<div class="row justify-content-center">
+			<!-- <div class="tarjeta">
+			
+				<div class="cabecera" style="background: url(images/card-background/img1.jpg);background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;">
+					<a class="parte1" href="">
+					<div class="titulo">202051 FUNDAMENTOS DE PROGRAMACION</div>				
+					</a>
+					<div class="nombre">RAUL EDUARDO ALMORA HERNANDEZ </div>
+				</div>
+	
+				<div class="medio">				
+					<div class="texto">
+						<img class="foto" src="images/card-profile-image/user1.jpg" alt="">
+						<h2>Se entrega hoy</h2>
+						<div class="tareas">
+							<a class="link" href="">Como leer un articulo cientifico</a>
+						</div>
+					</div>
+				</div>
+	
+				<div class="pie">				
+					<span class="icon2"><i class="far fa-folder fa-lg"></i></span>
+					<span class="icon1"><i class="far fa-address-book fa-lg"></i></span>
+				</div>
+	
+			</div> -->
+			
+			
+			
+		
+		</div>
+		
+	</div>
+
+	<div class="cuerpo">	
+	</div>
+	<script>
+		
+		var divCol = document.createElement("div");
+		divCol.setAttribute("class", "col mt-4");
+
+		var divTarjeta = document.createElement("div");
+		divTarjeta.setAttribute("class","tarjeta");
+
+		var divCabecera = document.createElement("div");
+		divCabecera.setAttribute("class", "cabecera");
+		divCabecera.setAttribute("style", "background: url(images/card-background/img2.jpg);background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;");
+			var divCabeceraA = document.createElement("a");
+			divCabeceraA.setAttribute("class","parte1");
+			divCabeceraA.setAttribute("href","href");
+				var divCabeceraTitulo = document.createElement("div");
+				divCabeceraTitulo.setAttribute("class", "titulo");
+				divCabeceraTitulo= document.createTextNode("Titulo de la tarjeta");
+			var divCabeceraNombre = document.createElement("div");
+			divCabeceraNombre.setAttribute("class", "nombre");
+			divCabeceraNombre = document.createTextNode("Nombre cualquiera");
+		var divMedio = document.createElement("div");
+		divMedio.setAttribute("class", "medio");
+			var divMedioTexto = document.createElement("div");
+			divMedioTexto.setAttribute("class", "texto");
+				var imgMedioTextoFoto = document.createElement("img");
+				imgMedioTextoFoto.setAttribute("class", "foto");
+				imgMedioTextoFoto.setAttribute("src", "images/card-profile-image/user1.jpg");
+				imgMedioTextoFoto.setAttribute("alt", "Descripcion de la foto");
+			var h2MedioTextoH2 = document.createElement("h2");
+			h2MedioTextoH2=document.createTextNode("Algun texto para el h2");
+			var divTareas = document.createElement("div");
+			divTareas.setAttribute("class", "tareas")
+			var aTareasLink = document.createElement("a")
+			aTareasLink.setAttribute("class", "link")
+			aTareasLink.setAttribute("href", "href")
+		var divPie = document.createElement("div")
+		divPie.setAttribute("class","pie")
+			var spanPie1 = document.createElement("span")
+			spanPie1.setAttribute("class", "icon2")
+				var ispanPie1 = document.createElement("i")
+				ispanPie1.setAttribute("class","far fa-folder fa-lg")
+				var spanPie2 = document.createElement("span")
+			    spanPie2.setAttribute("class", "icon1")
+				var ispanPie2 = document.createElement("i")
+				ispanPie2.setAttribute("class","far fa-address-book fa-lg")
+
+		var row = document.querySelector('.row')
+
+		divCol.appendChild(divTarjeta)
+		divTarjeta.appendChild(divCabecera)
+			divCabecera.appendChild(divCabeceraA)
+			divCabeceraA.appendChild(divCabeceraTitulo)
+
+		row.appendChild(divCol)
+	//
+	</script>
+	<script>
+		$(document).ready(function () {
+		  $('.navbarContainer').load('navbar.html');
+		});
+	  </script>
+	<script src="https://kit.fontawesome.com/5305b20e95.js " crossorigin="anonymous "></script>
+</body>
+</html>
