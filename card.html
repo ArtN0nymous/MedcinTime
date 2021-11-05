@@ -14,7 +14,7 @@
 	<div class="container" id="container-cards">
 		<div class="row justify-content-center">
 			<!-- <div class="tarjeta">
-			
+			<div class='col mt-4'></>
 				<div class="cabecera" style="background: url(images/card-background/img1.jpg);background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;">
 					<a class="parte1" href="">
 					<div class="titulo">202051 FUNDAMENTOS DE PROGRAMACION</div>				
@@ -38,10 +38,6 @@
 				</div>
 	
 			</div> -->
-			
-			
-			
-		
 		</div>
 		
 	</div>
@@ -49,7 +45,8 @@
 	<div class="cuerpo">	
 	</div>
 	<script>
-		
+		function newCard(backgroundImageUrl, cardTitle, etc)
+		{
 		var divCol = document.createElement("div");
 		divCol.setAttribute("class", "col mt-4");
 
@@ -58,13 +55,13 @@
 
 		var divCabecera = document.createElement("div");
 		divCabecera.setAttribute("class", "cabecera");
-		divCabecera.setAttribute("style", "background: url(images/card-background/img2.jpg);background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;");
+		divCabecera.setAttribute("style", backgroundImageUrl);
 			var divCabeceraA = document.createElement("a");
 			divCabeceraA.setAttribute("class","parte1");
 			divCabeceraA.setAttribute("href","href");
 				var divCabeceraTitulo = document.createElement("div");
 				divCabeceraTitulo.setAttribute("class", "titulo");
-				divCabeceraTitulo= document.createTextNode("Titulo de la tarjeta");
+				divCabeceraTitulo= document.createTextNode(cardTitle);
 			var divCabeceraNombre = document.createElement("div");
 			divCabeceraNombre.setAttribute("class", "nombre");
 			divCabeceraNombre = document.createTextNode("Nombre cualquiera");
