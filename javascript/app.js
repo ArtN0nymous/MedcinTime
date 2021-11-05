@@ -45,3 +45,30 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
+function newCard(backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis ){
+    var  card= document.getElementById("tabla_body").innerHTML += 
+     `<div class='col mt-4'></>
+    <div class="cabecera" style="background: url(${backgroundImgURL});background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;">
+        <a class="parte1" href="">
+        <div class="titulo">${cardTitle}</div>				
+        </a>
+        <div class="nombre">Dosis: ${contenidoUnidadDosis}${dosis}</div>
+    </div>
+
+    <div class="medio">				
+        <div class="texto">
+            <img class="foto" src="${medImageURL}" alt="">
+            <h2>Se entrega hoy</h2>
+            <div class="tareas">
+                <a class="link" href="">${numeroDosis} dosis el ${diaToma}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="pie">				
+        <span class="icon2"><i class="far fa-folder fa-lg"></i></span>
+        <span class="icon1"><i class="far fa-address-book fa-lg"></i></span>
+    </div>
+
+</div> ` 
+}

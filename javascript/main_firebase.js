@@ -220,25 +220,15 @@ function subir_img(){
 function leerdatosMed(){
     //verificar_loggedIn();
     var usuario = document.getElementById('usuario_medicamentos').value;
-    var tabla = document.getElementById('tabla_body');
+    var card = document.getElementById('tabla_body');
     db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
-        tabla.innerHTML = '';
+        card.innerHTML = '';
         querySnapshot.forEach((doc)=>{
-        tabla.innerHTML+=`
-            <tr style="background-color: rgb(163, 223, 148);">
-                <td scope='row'>${doc.id}</td>
-                <td>${doc.data().medicamento}</td>
-                <td>${doc.data().contenido}</td>
-                <td>${doc.data().dosis}</td>
-                <td>${doc.data().contenido_unidad}</td>
-                <td><img id="img" src="${doc.data().url}" width="250"></td>
-                <td>
-                <a class="btn btn-danger" id="eliminar" onclick="Borrar('${doc.id}')" data-toggle="Eliminar" title="Eliminar">
-                <i class="fas fa-trash"></i></a>
-                <a class="btn btn-warning" onclick="Editar('${doc.id}','${doc.data().medicamento}','${doc.data().dosis}','${doc.data().contenido_unidad}','${doc.data().url}');" data-toggle="Editar" title="Editar">
-                <i class="fas fa-pencil-alt"></i></a>
-                </td>
-            </tr>`                 
+            newCard('images/card-background/img1.jpg',
+            doc.data().medicamento,
+            doc.data().contenido_unidad, doc.data().contenido,
+            doc.data().url,
+            doc.data().fecha_regist),'';
         });
     });
 }
