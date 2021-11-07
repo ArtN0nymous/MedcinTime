@@ -20,7 +20,7 @@
     <div class="contianer-fluid" style="margin-left: 30%;">
         <div class="col-sm-6" style="text-align: center;">
             <div class="row" style="text-align: center;">
-                <input type="hidden" id="usuario_medicamentos"><button class="btn btn-primary" onclick="leerdatosMed()">Actualizar</button>
+                <input type="hidden" id="usuario_medicamentos"><button class="btn btn-primary" onclick="leerdatos('Med')">Actualizar</button>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -31,6 +31,43 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditarMed" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title">Medicamento</h1>
+            </div>
+            <div class="modal-body">
+                <section class="form-register">
+                    <h1>Editar Medicamento</h1>
+                    <div class="controles">
+                        <div class="col-lg">
+                            <label>ID:</label><input type="text" id="med_id" readonly="true"><br>
+                            <label>Medicamento:</label><br>
+                            <input class="controls" type="text" name="med_nombre" id="med_nombre"><br>
+                            <label>Contenido por caja:</label><br>
+                            <input class="controls" type="text" id="med_contenido"><br>
+                            <label>Contenido por unidad:</label><br>
+                            <input class="controls" type="text" name="med_unidad" id="med_unidad">
+                            <label>Dosis:</label>
+                            <input type="text" id="med_dosis" name="med_dosis">
+                            <label>Fecha de registro:</label><br>
+                            <input type="text" id="fecha_registro"><br>
+                            <label>Imagen:<input type="checkbox" id="imagen" onchange="Checks('AM')"></label>
+                            <input type="file" id="file_selector" accept="image/x-png,image/gif,image/jpeg,image/jpg" onchange="subir_img();"><br>
+                            <img id="img" width="250"></img><textarea id="url_imagen" rows="4" readonly="true"></textarea>
+                        </div>
+                        <br>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal('EditarMed')">Cancelar</button>
+            <button type="button" class="btn btn-outline-success modalRegistro" id="btnactualizar" onclick="Actualizar('Med')">Guardar</button>
+            </div>
+        </div>
         </div>
     </div>
     <script src="javascript/main_firebase.js"></script>

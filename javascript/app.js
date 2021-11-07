@@ -1,23 +1,38 @@
 $(document).ready(function(){
     if(document.getElementById('fecha_input')){
         document.getElementById('fecha_input').style.display = "none";
+    }else if(document.getElementById('file_selector') && document.getElementById('med_id')){
+        document.getElementById('file_selector').style.display = "none";
     }
     verificar_loggedIn();
   });
-function ModalRegist(){
-    $('#modalRegistro').modal({backdrop: 'static', keyboard: false});
-    $("#modalRegistro").modal('show');
+function MostrarModal(nombre){
+    $('#modal'+nombre).modal({backdrop: 'static', keyboard: false});
+    $("#modal"+nombre).modal('show');
 }
-function OcultarModal(){
-    $("#modalRegistro").modal('hide');
-    $("#email").focus();
+function OcultarModal(nombre){
+    $("#modal"+nombre).modal('hide');
+    if(document.getElementById('email')){
+        $("#email").focus();
+    }
     //$("#email").attr("style","backgroud-color:#cef2f1;");
 }
-function Fecha_esp(){
-    if($("#Fecha_esp").is(':checked')) {
-        document.getElementById('fecha_input').style.display = "";
-    } else {
-        document.getElementById('fecha_input').style.display = "none";
+function Checks(Checkbox){
+    switch (Checkbox){
+        case 'NM':
+            if($("#Fecha_esp").is(':checked')) {
+                document.getElementById('fecha_input').style.display = "";
+            } else {
+                document.getElementById('fecha_input').style.display = "none";
+            }
+            break;
+        case 'AM':
+            if($("#imagen").is(':checked')) {
+                document.getElementById('file_selector').style.display = "";
+            } else {
+                document.getElementById('file_selector').style.display = "none";
+            }
+            break;
     }
 }
 function selectIMG(){
@@ -45,7 +60,7 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
-function newCard(backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis ){
+function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis,num ){
     var  card= document.getElementById("tabla_body").innerHTML += 
 				 `<div class='col mt-4'></>
 				<div class="cabecera" style="background: url(${backgroundImgURL});background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;">
@@ -65,10 +80,14 @@ function newCard(backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImag
 					</div>
 				</div>
 	
-				<div class="pie">				
+				<div class="pie">	
 					<span class="icon2"><i class="fa fa-arrows-alt fa-lg"></i></span>
-					<span class="icon1"><i class="fa fa-pencil fa-lg"></i></span>
+					<span class="icon1" onclick="editarMed('${id}')"><i class="fa fa-pencil fa-lg"></i></span>
 				</div>
 	
 			</div> `
+}
+function editarMed(id){
+    MostrarModal('EditarMed');
+    Consultas('Med',id);
 }

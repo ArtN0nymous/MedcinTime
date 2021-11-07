@@ -27,7 +27,7 @@ firebase.initializeApp({
           storageRef = firebase.storage().ref("Medicamentos_"+user_uid);
           if(document.getElementById('usuario_medicamentos')){
             document.getElementById('usuario_medicamentos').value=user_uid;
-            leerdatosMed();
+            leerdatos('Med');
           }
           //alert("usuario: " + user.uid);
         } else {
@@ -185,7 +185,7 @@ function Guardar_M(){
         fecha_regist =  $("#fecha_input").val();
     } else {
         fecha_regist = new Date();
-        fecha_regist = fecha_regist.getDate() + "/" + (fecha_regist.getMonth() +1) + "/" + fecha_regist.getFullYear();
+        fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
     }
     db.collection("userM_"+user_uid).add({
         medicamento: $("#medicamento").val(),
@@ -217,20 +217,74 @@ function subir_img(){
     });
 }
 //Leer Datos
-function leerdatosMed(){
+function leerdatos(oper){
     //verificar_loggedIn();
-    var usuario = document.getElementById('usuario_medicamentos').value;
-    var card = document.getElementById('tabla_body');
-    db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
-        card.innerHTML = '';
-        querySnapshot.forEach((doc)=>{
-            newCard('images/card-background/img1.jpg',
-            doc.data().medicamento,
-            doc.data().contenido_unidad, doc.data().contenido,
-            doc.data().url,
-            doc.data().fecha_regist),'';
+    if(oper=='Med'){
+        var usuario = document.getElementById('usuario_medicamentos').value;
+        var card = document.getElementById('tabla_body');
+        var num = 0;
+        db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
+            card.innerHTML = '';
+            querySnapshot.forEach((doc)=>{
+                num  +=1;
+                newCard(doc.id,'images/card-background/img1.jpg',
+                doc.data().medicamento,
+                doc.data().contenido_unidad, doc.data().contenido,
+                doc.data().url,
+                doc.data().fecha_regist,'8',num);
+            });
         });
-    });
+    }
+}
+//consultar informacion de un elemento
+function Consultas(oper,id){
+    verificar_loggedIn();
+    if(oper=="Med"){
+        try{
+            db.collection("userM_"+user_uid).onSnapshot((querySnapshot)=>{
+                querySnapshot.forEach((doc)=>{
+                    if(doc.id == id){
+                        //var date = new Date(doc.data().fecha_regist);
+                        //const localDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay();
+                        document.getElementById('med_id').value = doc.id;
+                        document.getElementById('med_nombre').value = doc.data().medicamento;
+                        document.getElementById('med_contenido').value = doc.data().contenido;
+                        document.getElementById('med_unidad').value = doc.data().contenido_unidad;
+                        document.getElementById('med_dosis').value = doc.data().dosis;
+                        document.getElementById('fecha_registro').value = doc.data().fecha_regist;
+                        $("#img").attr('src',doc.data().url);
+                        document.getElementById('url_imagen').value = doc.data().url;
+                    }
+                });
+            });
+        }catch(e){
+            alert(e.message);
+        }
+    }
+}
+function Actualizar(oper){
+    if(oper == "Med"){
+        var id= $("#med_id").val();
+        var url = $("#url_imagen").val();
+        if(url != ""){
+            db.collection("userM_"+user_uid).doc(id).set({
+                medicamento: $("#med_nombre").val(),
+                dosis: $("#med_dosis").val(),
+                contenido: $("#med_contenido").val(),
+                contenido_unidad: $("#med_unidad").val(),
+                fecha_regist: $("#fecha_registro").val(),
+                url: url
+            })
+            .then((docRef) => {
+                OcultarModal('EditarMed');
+                alert("Medicamento Actualizado correctamente");
+            })
+            .catch((error) => {
+                alert("Error adding document: ", error.message);
+            });
+        }
+        
+    }
 }
   /*
 //Eliminar documento
