@@ -177,30 +177,70 @@ function Guardar_Perfil(){
     });
 }
 //Medicamentos
-function Guardar_M(){
+function Guardar(oper){
     verificar_loggedIn();
-    var url = $("#url_imagen").val();
-    var fecha_regist = "";
-    if($("#Fecha_esp").is(':checked')) {
-        fecha_regist =  $("#fecha_input").val();
-    } else {
-        fecha_regist = new Date();
-        fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
+    switch(oper){
+        case 'ME':
+            var url = $("#url_imagen").val();
+            var fecha_regist = "";
+            if($("#Fecha_esp").is(':checked')) {
+                fecha_regist =  $("#fecha_input").val();
+            } else {
+                fecha_regist = new Date();
+                fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
+            }
+            db.collection("userM_"+user_uid).add({
+                medicamento: $("#medicamento").val(),
+                dosis: $("#dosis").val(),
+                contenido: $("#contenido").val() + " " + $("#dosis").val(),
+                contenido_unidad: $("#contenido_u").val() + " " + $("#dosis_u").val(),
+                fecha_regist: fecha_regist,
+                url: url
+            })
+            .then((docRef) => {
+                alert("Medicamento Guardado correctamente");
+            })
+            .catch((error) => {
+                alert("Error adding document: ", error);
+            });
+            break;
+        case 'RE':
+            var url = "Aqui va la URL";
+            var cantidad_xcaja = parseInt($("#contenido").val(), 10);
+            var cantidad_cajas = parseInt($("#cantidad_cajas").val(), 10);
+            var contenido_total = cantidad_xcaja * cantidad_cajas;
+            if(url != ""){
+                var fecha_inicio = $("#fecha_inicio");
+                if(fecha_inicio != "") {
+                    fecha_inicio =  $("#fecha_inicio").val();
+                } else {
+                    fecha_inicio = new Date();
+                    fecha_inicio = fecha_inicio.getDate() + "-" + (fecha_inicio.getMonth() +1) + "-" + fecha_inicio.getFullYear();
+                }
+                db.collection("userRe_"+user_uid).add({
+                    medicamento: $("#medicamento").val(),
+                    cantidadTomar:$("#cantidadTomar").val(),
+                    dosisTomar:$("#dosis_tomar").val(),
+                    contenido_unidad: $("#contenido_u").val(),
+                    cantidad_cajas: cantidad_cajas,
+                    cantidadXcaja:cantidad_xcaja,
+                    Total_tomar:contenido_total,
+                    tcadaCant:$("#cantidad_cada").val(),
+                    tcadaMedida:$("#tomar_cada_medida").val(),
+                    fecha_inicio: fecha_inicio,
+                    url: url
+                })
+                .then((docRef) => {
+                    alert("Recordatorio Guardado correctamente");
+                })
+                .catch((error) => {
+                    alert("Error adding document: ", error);
+                });
+            }else{
+                return;
+            }
+            break;
     }
-    db.collection("userM_"+user_uid).add({
-        medicamento: $("#medicamento").val(),
-        dosis: $("#dosis").val(),
-        contenido: $("#contenido").val() + " " + $("#dosis").val(),
-        contenido_unidad: $("#contenido_u").val() + " " + $("#dosis_u").val(),
-        fecha_regist: fecha_regist,
-        url: url
-    })
-    .then((docRef) => {
-        alert("Medicamento Guardado correctamente");
-    })
-    .catch((error) => {
-        alert("Error adding document: ", error);
-    });
 }
 //subir imagen
 function subir_img(){
