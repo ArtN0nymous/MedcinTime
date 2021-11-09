@@ -1,0 +1,112 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background: rgb(243, 243, 240);
+
+}
+.content{
+    max-width: 1700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5em;
+}
+.logo{
+    text-align: center;
+    font-size: 3em;
+}
+.logo spam{
+    color: #0093E9;
+}
+.contact-wrapper{
+    box-shadow: 0 0 20px 0 rgba(255, 255, 255, .3);
+}
+.contact-wrapper > * {
+    padding: 1em;
+}
+.contact-form{
+    background: rgb(245, 247, 248);
+}
+.contact-form form .block{
+    grid-column: 1 / 3;
+}
+.contact-form form p{
+    margin: 0;
+    padding: 1em;
+} 
+button,
+#nombre,
+#neto,
+#contenido{
+    width: 100%; 
+    padding: .7em;
+    border: none;
+    background: none;
+    outline: 0;
+    color: rgb(12, 12, 12);
+    border-bottom: 1px solid #0093E9;
+}
+#dosis,
+#dosis2{
+    width: 50%; 
+    padding: .7em;
+    border: none;
+    background: none;
+    outline: 0;
+    color: rgb(12, 12, 12);
+    border-bottom: 1px solid #0093E9;
+}
+#select,
+#select2{
+    width: 30%; 
+    padding: .7em;
+    border: none;
+    background: none;
+    outline: 0;
+    color: rgb(12, 12, 12);
+    border-bottom: 1px solid #0093E9; 
+}
+button{
+    border: 0;
+    text-transform: uppercase;
+    padding: .3em;
+    color: #fff;
+    text-align: left;
+}
+
+.contact-info{
+    background: rgb(241, 236, 236);
+}
+.contact-info h4,
+.contact-info ul,
+.contact-info p{
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+.contact-info ul{
+    list-style: none;
+    padding: 0o;
+}
+.contact-info ul li{
+    padding: .3em;
+}
+#imagen{
+    width: 100%;
+}
+#img{
+    width: 1.2em;
+    height: .8em;
+   
+}
+@media (min-width: 700px){
+    body{
+        padding: 0%;
+    }
+    .contact-wrapper{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+    .contact-wrapper>*{
+        padding: 2em;
+    }
+}

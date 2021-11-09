@@ -118,4 +118,78 @@ section {
 		float:right;
 		font-size:4rem;
 	}
+	
 }
+@media screen and (max-width:400px ) {
+	header nav {
+		width:80%;
+		height:100%;
+		left:-100%;
+		margin:0;
+		position: fixed;
+		background-color: #FFFFFA;
+		
+	}
+	.dropdown_menu{
+		background-color: #FFFFFA;
+		padding-bottom: 70vh;
+		border: 1px solid grey;
+		-webkit-box-shadow: 6px 17px 24px 5px rgba(0,0,0,0.59);
+		-moz-box-shadow: 6px 17px 24px 5px rgba(0,0,0,0.59);
+		box-shadow: 6px 17px 24px 5px rgba(0,0,0,0.59);
+	}
+	header nav ul li a {
+		color:  black;
+		padding:10px;
+		display:block;
+		text-decoration:none;
+	}
+	header nav ul li {
+		display:block;
+		float:none;
+		border-bottom:1px solid;
+	}
+
+	.menu_bar {
+		display:block;
+		background:#ccc;
+	}
+
+	.menu_bar .bt-menu {
+		display:block;
+		padding:20px;
+		background-color: #0093E9;
+		color:#fff;
+		text-decoration:none;
+		font-weight: bold;
+		font-size:2rem;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+		width:100vw;
+	}
+
+	.menu_bar span {
+		float:right;
+		font-size:4rem;
+	}
+}
+.btn-grad {background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
