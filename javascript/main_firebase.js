@@ -303,27 +303,62 @@ function Consultas(oper,id){
     }
 }
 function Actualizar(oper){
-    if(oper == "Med"){
-        var id= $("#med_id").val();
-        var url = $("#url_imagen").val();
-        if(url != ""){
-            db.collection("userM_"+user_uid).doc(id).set({
-                medicamento: $("#med_nombre").val(),
-                dosis: $("#med_dosis").val(),
-                contenido: $("#med_contenido").val(),
-                contenido_unidad: $("#med_unidad").val(),
-                fecha_regist: $("#fecha_registro").val(),
-                url: url
-            })
-            .then((docRef) => {
-                OcultarModal('EditarMed');
-                alert("Medicamento Actualizado correctamente");
-            })
-            .catch((error) => {
-                alert("Error adding document: ", error.message);
-            });
-        }
-        
+    var id= $("#med_id").val();
+    var url = $("#url_imagen").val();
+    switch (oper){
+        case 'Med':
+            if(url != "" && id != ""){
+                db.collection("userM_"+user_uid).doc(id).set({
+                    medicamento: $("#med_nombre").val(),
+                    dosis: $("#med_dosis").val(),
+                    contenido: $("#med_contenido").val(),
+                    contenido_unidad: $("#med_unidad").val(),
+                    fecha_regist: $("#fecha_registro").val(),
+                    url: url
+                })
+                .then((docRef) => {
+                    OcultarModal('EditarMed');
+                    alert("Medicamento Actualizado correctamente");
+                })
+                .catch((error) => {
+                    alert("Error adding document: ", error.message);
+                });
+            } 
+            break;
+        case 'RE':
+            if(url != "" && id != ""){
+                var cantidad_xcaja = parseInt($("#contenido").val(), 10);
+                var cantidad_cajas = parseInt($("#cantidad_cajas").val(), 10);
+                var contenido_total = cantidad_xcaja * cantidad_cajas;
+                var fecha_inicio = $("#fecha_inicio");
+                if(fecha_inicio != "") {
+                    fecha_inicio =  $("#fecha_inicio").val();
+                } else {
+                    fecha_inicio = new Date();
+                    fecha_inicio = fecha_inicio.getDate() + "-" + (fecha_inicio.getMonth() +1) + "-" + fecha_inicio.getFullYear();
+                }
+                db.collection("userRe_"+user_uid).doc(id).set({
+                    medicamento: $("#medicamento").val(),
+                    cantidadTomar:$("#cantidadTomar").val(),
+                    dosisTomar:$("#dosis_tomar").val(),
+                    contenido_unidad: $("#contenido_u").val(),
+                    cantidad_cajas: cantidad_cajas,
+                    cantidadXcaja:cantidad_xcaja,
+                    Total_tomar:contenido_total,
+                    tcadaCant:$("#cantidad_cada").val(),
+                    tcadaMedida:$("#tomar_cada_medida").val(),
+                    fecha_inicio: fecha_inicio,
+                    url: url
+                })
+                .then((docRef) => {
+                    OcultarModal('EditarRec');
+                    alert("Recordatorio Actualizado correctamente");
+                })
+                .catch((error) => {
+                    alert("Error adding document: ", error.message);
+                });
+            } 
+            break;
     }
 }
   /*
