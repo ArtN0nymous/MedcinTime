@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FORMULARIO DE REGISTRO DE RECORDATORIO</title>
+    <link rel="stylesheet" href="css/recordatorio.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- GOOGLE FONTs -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+</head>
+<body>
+    <div class="container">
+    <div class="content">
+     
+        <div class="contact-wrapper animated bounceInUp">
+            <div class="contact-form">
+                <h3>REGISTRO DE RECORDATORIO</h3>
+                <form action="">
+                    
+                        <label>Seleccionar medicamento</label>
+                        <input type="text" name="medicamento" id="medicamento">
+                    
+                  <p>
+                        <label for="dosis">Dosis</label> 
+                        <input type="text" name="Dosis" id="dosis">
+                        <select name="select" id="select">
+                            <option value="ml">ml</option>
+                            <option value="mg">mg</option>
+                            <option value="µg">µg</option>
+                            <option value="Tabletas">Tabletas</option>
+                            <option value="parches">parches</option>
+                            <option value="g">g</option>
+                            <option value="Capsulas">Capsulas</option>
+                            <option value="Ampolleta">Ampolleta</option>
+                            <option value="Cucharada">Cucharada</option>
+                        </select>
+                    </p>
+
+                     <p>
+                 <label>cantidad de tiempo</label>
+                <input id="number" type="number" value="0">
+             </p>
+                    <p>
+                        <label>Medida de tiempo</label>
+                   <select name="select" id="select1">
+                        <option value="1">Minutos</option> 
+                        <option value="2">Horas</option>
+                        <option value="3">Dias</option> 
+                        <option value="4">Semanas</option> 
+                       
+                     </select>
+                </p>
+                <p>
+                     <label>Fecha</label>
+                     <input id="date" type="date">
+                    </p>
+                    <p class="block">
+                       <label>NOTAS</label> 
+                        <textarea name="NOTAS" rows="3"></textarea>
+                    </p>
+                    <p class="block">
+                        <button class="btn-grad">
+                            GUARDAR
+            
+                        </button>
+                    </p>
+                     <p class="block">
+                        <button class="btn-grad">
+                            LIMPIAR
+
+                        </button>
+                    </p>
+                </form>
+            </div>
+                <div class="contact-info">
+                <h4>MEDICAMENTO</h4>
+                
+                <p>
+                    <img src="images/card-background/img1.jpg" id="imagen"> 
+
+     </p>
+            
+           </div> 
+            </div>
+           
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+      $('.navbarContainer').load('navbar.html');
+    });
+  </script>
+  
+  <script src="https://kit.fontawesome.com/5305b20e95.js " crossorigin="anonymous "></script>
+</html>
