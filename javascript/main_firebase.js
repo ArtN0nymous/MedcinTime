@@ -1,6 +1,6 @@
 firebase.initializeApp({
     apiKey: "AIzaSyDOb4nOsyiw1xuxBHjGKiIZ6FP7eeaD89s",
-    authDomain: "medcintime-6b513.firebaseapp.com",
+    authDomain: "medcintime.ml",
     projectId: "medcintime-6b513",
     storageBucket: "medcintime-6b513.appspot.com",
     messagingSenderId: "649910524760",
