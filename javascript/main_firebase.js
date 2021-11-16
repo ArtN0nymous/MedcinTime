@@ -279,34 +279,61 @@ function leerdatos(oper){
 //consultar informacion de un elemento
 function Consultas(oper,id){
     verificar_loggedIn();
-    if(oper=="Med"){
-        try{
-            db.collection("userM_"+user_uid).onSnapshot((querySnapshot)=>{
-                querySnapshot.forEach((doc)=>{
-                    if(doc.id == id){
-                        //var date = new Date(doc.data().fecha_regist);
-                        //const localDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay();
-                        document.getElementById('med_id').value = doc.id;
-                        document.getElementById('med_nombre').value = doc.data().medicamento;
-                        document.getElementById('med_contenido').value = doc.data().contenido;
-                        document.getElementById('med_unidad').value = doc.data().contenido_unidad;
-                        document.getElementById('med_dosis').value = doc.data().dosis;
-                        document.getElementById('fecha_registro').value = doc.data().fecha_regist;
-                        $("#img").attr('src',doc.data().url);
-                        document.getElementById('url_imagen').value = doc.data().url;
-                    }
+    switch(oper){
+        case 'MD':
+            try{
+                db.collection("userM_"+user_uid).onSnapshot((querySnapshot)=>{
+                    querySnapshot.forEach((doc)=>{
+                        if(doc.id == id){
+                            //var date = new Date(doc.data().fecha_regist);
+                            //const localDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay();
+                            document.getElementById('med_id').value = doc.id;
+                            document.getElementById('med_nombre').value = doc.data().medicamento;
+                            document.getElementById('med_contenido').value = doc.data().contenido;
+                            document.getElementById('med_unidad').value = doc.data().contenido_unidad;
+                            document.getElementById('med_dosis').value = doc.data().dosis;
+                            document.getElementById('fecha_registro').value = doc.data().fecha_regist;
+                            $("#img").attr('src',doc.data().url);
+                            document.getElementById('url_imagen').value = doc.data().url;
+                        }
+                    });
                 });
-            });
-        }catch(e){
-            alert(e.message);
-        }
+            }catch(e){
+                alert(e.message);
+            }
+            break;
+        case 'RE':
+            try{
+                db.collection("userRe_"+user_uid).onSnapshot((querySnapshot)=>{
+                    querySnapshot.forEach((doc)=>{
+                        if(doc.id == id){
+                            document.getElementById('med_id').value = doc.id;
+                            document.getElementById('med_nombre').value = doc.data().medicamento;
+                            document.getElementById('med_contenido').value = doc.data().contenido;
+                            document.getElementById('med_unidad').value = doc.data().contenido_unidad;
+                            document.getElementById('med_cantidad_tomar').value = doc.data().cantidadTomar;
+                            document.getElementById('med_dosis').value = doc.data().dosisTomar;
+                            document.getElementById('med_cant_cajas').value = doc.data().cantidad_cajas;
+                            document.getElementById('med_acntXcaja').value = doc.data().cantidadXcaja;
+                            document.getElementById('med_tomar_cada').value = doc.data().tcadaCant;
+                            document.getElementById('med_tomar_medida').value = doc.data().tcadaMedida;
+                            document.getElementById('fecha_inicio').value = doc.data().fecha_inicio;
+                            $("#img").attr('src',doc.data().url);
+                            document.getElementById('url_imagen').value = doc.data().url;
+                        }
+                    });
+                });
+            }catch(e){
+                alert(e.message);
+            }
+            break;
     }
 }
 function Actualizar(oper){
     var id= $("#med_id").val();
     var url = $("#url_imagen").val();
     switch (oper){
-        case 'Med':
+        case 'MD':
             if(url != "" && id != ""){
                 db.collection("userM_"+user_uid).doc(id).set({
                     medicamento: $("#med_nombre").val(),
