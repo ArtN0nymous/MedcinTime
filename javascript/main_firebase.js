@@ -183,26 +183,77 @@ function Guardar(oper){
         case 'ME':
             var url = $("#url_imagen").val();
             var fecha_regist = "";
+            let medicamento = $("#medicamento").val();
+            let dosis = $("#dosis").val();
+            let contenido = $("#contenido").val();
+            let contenido_unidad = $("#contenido_u").val();
+            let dosis_unidad = $("#dosis_u").val();
+            let dosis_R = $("#Dosis_R").val();
+            let dosis_Ru = $("#Dosis_Ru").val();
             if($("#Fecha_esp").is(':checked')) {
                 fecha_regist =  $("#fecha_input").val();
             } else {
                 fecha_regist = new Date();
                 fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
             }
-            db.collection("userM_"+user_uid).add({
-                medicamento: $("#medicamento").val(),
-                dosis: $("#dosis").val(),
-                contenido: $("#contenido").val() + " " + $("#dosis").val(),
-                contenido_unidad: $("#contenido_u").val() + " " + $("#dosis_u").val(),
-                fecha_regist: fecha_regist,
-                url: url
-            })
-            .then((docRef) => {
-                alert("Medicamento Guardado correctamente");
-            })
-            .catch((error) => {
-                alert("Error adding document: ", error);
-            });
+            if(url != ""){
+                if(medicamento != ""){
+                    if(dosis != ""){
+                        if(contenido != ""){
+                            if(dosis_unidad != ""){
+                                if(contenido_unidad != ""){
+                                    if(dosis_R != ""){
+                                        if(dosis_Ru != ""){
+                                            db.collection("userM_"+user_uid).add({
+                                                medicamento: medicamento,
+                                                dosis: dosis,
+                                                contenido:  contenido,
+                                                contenido_unidad:  contenido_unidad,
+                                                dosis_unidad: dosis_unidad,
+                                                dosis_R: dosis_R,
+                                                dosis_Ru:dosis_Ru,
+                                                fecha_regist: fecha_regist,
+                                                url: url
+                                            })
+                                            .then((docRef) => {
+                                                Alertas('3','','Medicamento','');
+                                                window.location.href = "../Catalogo_med.html";
+                                            })
+                                            .catch((error) => {
+                                                Alertas('4','','Medicamento',error.message);
+                                            });
+                                        }else{
+                                            Alertas('2','Dosis_unidad','','');
+                                            break;
+                                        }
+                                    }else{
+                                        Alertas('1','Dosis','','');
+                                        break;
+                                    }
+                                }else{
+                                    Alertas('1','Contenido por unidad','','');
+                                    break;
+                                }
+                            }else{
+                                Alertas('2','Dosis_unidad','','');
+                                break;
+                            }
+                        }else{
+                            Alertas('1','Contenido Neto','','');
+                            break;
+                        }
+                    }else{
+                        Alertas('2','Dosis','','');
+                        break;
+                    }
+                }else{
+                    Alertas('1','Medicamento','','');
+                    break;
+                }
+            }else{
+                Alertas('5','url_imagen','Medicamento','Ocurrió un error, debe selecionar una imagen valida');
+                break;
+            }
             break;
         case 'RE':
             var url = "Aqui va la URL";
@@ -259,21 +310,23 @@ function subir_img(){
 //Leer Datos
 function leerdatos(oper){
     //verificar_loggedIn();
-    if(oper=='Med'){
-        var usuario = document.getElementById('usuario_medicamentos').value;
-        var card = document.getElementById('tabla_body');
-        var num = 0;
-        db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
-            card.innerHTML = '';
-            querySnapshot.forEach((doc)=>{
-                num  +=1;
-                newCard(doc.id,'images/card-background/img1.jpg',
-                doc.data().medicamento,
-                doc.data().contenido_unidad, doc.data().contenido,
-                doc.data().url,
-                doc.data().fecha_regist,'8',num);
+    switch(oper){
+        case 'Med':
+            var usuario = document.getElementById('usuario_medicamentos').value;
+            var card = document.getElementById('tabla_body');
+            var num = 0;
+            db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
+                card.innerHTML = '';
+                querySnapshot.forEach((doc)=>{
+                    num  +=1;
+                    newCard(doc.id,'images/card-background/img1.jpg',
+                    doc.data().medicamento,
+                    doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
+                    doc.data().url,
+                    doc.data().fecha_regist,'8',num);
+                });
             });
-        });
+            break;
     }
 }
 //consultar informacion de un elemento

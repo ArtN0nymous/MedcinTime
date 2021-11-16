@@ -100,3 +100,27 @@ function Editar(oper,id){
     }
     
 }
+function Alertas(Tipo,nombre_campo,objeto,message){
+    //Tipo 1: Campos vacios que debe llenar el usuario
+    //Tipo 2: Campos vacios que tienen un default pero algo salió mal
+    //Tipo 3: Mensaje de exito
+    //Tipo 4: Errores durante las operaciones y/o consultas
+    //Tipo 5: Mensaje personalizado
+    switch(Tipo){
+        case '1':
+            alert("El campo: " + nombre_campo + " es obligatorio.");
+            break;
+        case '2':
+            alert("Ocurrió un error intentelo nuevamente: "+ nombre_campo);
+            break;
+        case '3':
+            alert(objeto + " guardado correctamente !");
+            break;
+        case '4':
+            alert("Ha ocurrido un error daurante el proceso / "+ objeto +" / por favor intente de nuevo, Error: " + message);
+            break;
+        case '5':
+            alert(message + " ###OBJETO: " + objeto + " ###CAMPO: " + nombre_campo);
+            break;
+    }
+}

@@ -38,9 +38,9 @@ body{
     padding: 1em;
 } 
 button,
-#nombre,
-#neto,
-#contenido{
+#medicamento,
+#contenido,
+#contenido_u{
     width: 100%; 
     padding: .7em;
     border: none;
@@ -50,7 +50,7 @@ button,
     border-bottom: 1px solid #0093E9;
 }
 #dosis,
-#dosis2{
+#Dosis_R{
     width: 50%; 
     padding: .7em;
     border: none;
@@ -59,8 +59,8 @@ button,
     color: rgb(12, 12, 12);
     border-bottom: 1px solid #0093E9;
 }
-#select,
-#select2{
+#Dosis_Ru,
+#dosis_u{
     width: 70%; 
     text-align: center;
     padding: .7em;
@@ -95,13 +95,8 @@ button{
 .contact-info ul li{
     padding: .3em;
 }
-#imagen{
-    width: 100%;
-}
 #img{
-    width: 1.2em;
-    height: .8em;
-   
+    width: 100%;
 }
 @media (min-width: 700px){
     body{
