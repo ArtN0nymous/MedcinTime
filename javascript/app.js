@@ -124,3 +124,10 @@ function Alertas(Tipo,nombre_campo,objeto,message){
             break;
     }
 }
+function Ventanas(nombre){
+    switch(nombre){
+        case 'index':
+            window.location.href = "../index.html";
+            break;
+    }
+}
