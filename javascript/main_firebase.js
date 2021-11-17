@@ -15,10 +15,6 @@ firebase.initializeApp({
   //var analitycs = firebase.analitycs();
   //variables publicas
   var user_uid = "";
-  //Verificar usuario inicia sesion
-  $(document).ready(function(){
-    verificar_loggedIn();
-  });
   function verificar_loggedIn(){
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
