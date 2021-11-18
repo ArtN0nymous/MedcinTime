@@ -130,6 +130,7 @@ function Cerrar_sesion(){
         // Sign-out successful.
       }).catch((error) => {
         // An error happened.
+        Alertas('4','','Cerrar sesión',error.message);
       });
 }
 

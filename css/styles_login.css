@@ -74,11 +74,14 @@ h2 {
 }
 
 #modal_body{
-    background-color: #60c2f3
+    background-color: white;
 }
 #modal_header{
     background-color: rgb(56, 134, 144);
     color: white;
+}
+#modal_footer{
+    background-color: white;
 }
 h2.inactive {
     color: #cccccc;

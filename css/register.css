@@ -14,15 +14,25 @@ label{
 	font-size: 100%;
 }
 
+.modal-body{
+	background-color: white;
+}
+.modal-footer{
+	background-color: rgb(56, 134, 144);
+}
+.modal-header{
+	background-color: rgb(56, 134, 144);
+	color: white;
+}
 .form-register {
-	width: 98%;
-	background: #3b83bd;
+	width: 100%;
+	background: white;
 	padding: 0.7%;
 	margin: auto;
 	border-radius: 0.40em;
 	font-family: "Poppins", sans-serif;
-	color: white;
-	box-shadow: 0.4375em 0.8125em 2.31255em #000;
+	color: black;
+	/*box-shadow: 0.4375em 0.8125em 2.31255em #000;*/
 }
 .form-reset {
 	width: 98%;
@@ -67,6 +77,9 @@ input[type=checkbox] {
     font-size: 150%;
 }
 
+#terminos_condiciones{
+	width: 100%;
+}
 .form-register a {
     color: white;
     text-decoration: none;	
