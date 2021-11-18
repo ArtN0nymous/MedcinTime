@@ -35,7 +35,7 @@
             </form>
 
             <div id="formFooter">
-                <a class="underlineHover" href="#">Olvidaste tu contraseña?</a>
+                <a class="underlineHover" href="#" onclick="MostrarModal('ForgetPassword')">Olvidaste tu contraseña?</a>
                 <div class="form-inline">
                     <a>Eres nuevo?</a>
                     <a class="underlineHover" id="register" onclick="MostrarModal('Registro')">Registrate !</a>
@@ -80,7 +80,28 @@
         </div>
         </div>
     </div>
+    <div class="modal fade" id="modalForgetPassword" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" id="modal_header">
+            <h1 class="modal-title">Olvidé mi contraseña</h1>
+            </div>
+            <div  id="modal_body" class="modal-body" style="text-align: center;">
+                <section class="form-reset">
+                    <h2 style="color: rgb(60, 140, 160);">Ingrese su dirección de correo electronico</h2>
+                    <div id="controls_reset">
+                        <input type="email" id="email1" class="fadeIn second"  placeholder="E-mail">
+                        <input type="button" class="fadeIn fourth" value="Restablecer" onclick="ResetPassword()">
+                    </div>
+                    <h2 id="label_forget" style="color: crimson; height: 2rem;">Se ha enviado una notificación a su dirección de correo electronico, verifique su bandeja de entrada.</h2>
+                </section>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal('ForgetPassword')">Cancelar</button>
+            </div>
+        </div>
+        </div>
+    </div>
     <script src="javascript/main_firebase.js"></script>
-    <script src="javascript/LoggedIn_Login.js"></script>
+    <!--<script src="javascript/LoggedIn_Login.js"></script>-->
 </body>
 </html>

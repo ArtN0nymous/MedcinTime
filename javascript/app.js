@@ -4,6 +4,9 @@ $(document).ready(function(){
     }else if(document.getElementById('file_selector') && document.getElementById('med_id')){
         document.getElementById('file_selector').style.display = "none";
     }
+    if(document.getElementById('label_forget')){
+        document.getElementById('label_forget').style.display = "none"
+    }
   });
 function MostrarModal(nombre){
     $('#modal'+nombre).modal({backdrop: 'static', keyboard: false});

@@ -24,6 +24,15 @@ label{
 	color: white;
 	box-shadow: 0.4375em 0.8125em 2.31255em #000;
 }
+.form-reset {
+	width: 98%;
+	background: #ffffff;
+	padding: 0.7%;
+	margin: auto;
+	border-radius: 0.40em;
+	font-family: "Poppins", sans-serif;
+	color: rgb(0, 0, 0);
+}
 .form-register h4 {
 	font-size: 1.375em;
 	/*margin-bottom: 1.25em;*/

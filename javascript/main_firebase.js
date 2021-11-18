@@ -133,6 +133,23 @@ function Cerrar_sesion(){
       });
 }
 
+function ResetPassword(){
+    var auth  = firebase.auth();
+    var email = $("#email1").val();
+
+    if(email != ""){
+        auth.sendPasswordResetEmail(email).then((result)=>{
+            if(document.getElementById('label_forget')){
+                document.getElementById('label_forget').style.display = ""
+            }
+        }).catch((error)=>{
+            Alertas('4','','Reset password',error.message);
+        });
+    }else{
+        $("#email1").focus();
+    }
+}
+
 function AccesoGoogle(){
     firebase.auth()
   .signInWithPopup(provider)
@@ -145,6 +162,7 @@ function AccesoGoogle(){
     var user = result.user.uid;
     debugger
     alert("Bienvenido a MedcinTime: " + user);
+    window.location.href = "../index.html";
   }).catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
