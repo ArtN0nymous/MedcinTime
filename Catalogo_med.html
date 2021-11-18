@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/floatButton.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/cards.css">
@@ -17,22 +18,17 @@
     <script src="javascript/app.js"></script>
 </head>
 <body>
-    <div class="contianer-fluid" style="margin-left: 30%;">
-        <div class="col-sm-6" style="text-align: center;">
-            <div class="row" style="text-align: center;">
+    <div class="navbarContainer" style="position: static;"></div>
+    <div class="container-fluid " style="text-align: center;">
+      
+            <div class="row" id="tabla_body" style="text-align: center;">
                 <input type="hidden" id="usuario_medicamentos"><button class="btn btn-primary" onclick="leerdatos('Med')">Actualizar</button>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Medicamentos</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla_body">
-                    </tbody>
-                </table>
+               
             </div>
-        </div>
+            
+            <a href="#" class="btn-flotante">+</a>
     </div>
+    <div class="addMedA" style="position: relative; float: right; margin-top: 95vh;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M13.25 2.5H2.75a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25zM2.75 1h10.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 15H2.75A1.75 1.75 0 011 13.25V2.75C1 1.784 1.784 1 2.75 1zM8 4a.75.75 0 01.75.75v2.5h2.5a.75.75 0 010 1.5h-2.5v2.5a.75.75 0 01-1.5 0v-2.5h-2.5a.75.75 0 010-1.5h2.5v-2.5A.75.75 0 018 4z"></path></svg></div>
     <div class="modal fade" id="modalEditarMed" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -73,5 +69,10 @@
     <script src="javascript/main_firebase.js"></script>
     <script src="javascript/LoggedIn.js"></script>
     <script src="https://kit.fontawesome.com/5305b20e95.js " crossorigin="anonymous "></script>
+    <script>
+        $(document).ready(function () {
+          $('.navbarContainer').load('navbar.html');
+        });
+      </script>
 </body>
 </html>
