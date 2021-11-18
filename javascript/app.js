@@ -61,7 +61,8 @@ function selectIMG(){
 }
 function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis,num ){
     var  card= document.getElementById("tabla_body").innerHTML += 
-				 `<div class='col mt-4'></>
+				 `<div class='col-md-4 mt-3'>
+                 <div class='tarjeta'>
 				<div class="cabecera" style="background: url(${backgroundImgURL});background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;">
 					<a class="parte1" href="">
 					<div class="titulo">${cardTitle}</div>				
@@ -80,10 +81,10 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 				</div>
 	
 				<div class="pie">	
-					<span class="icon2"><i class="fa fa-arrows-alt fa-lg"></i></span>
-					<span class="icon1" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-lg"></i></span>
+					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>
+					<span class="icon1" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-2x"></i></span>
 				</div>
-	
+                </div>
 			</div> `
 }
 function Editar(oper,id){
