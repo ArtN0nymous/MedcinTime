@@ -35,7 +35,7 @@
             </form>
 
             <div id="formFooter">
-                <a class="underlineHover" href="#">Olvidaste tu contraseña?</a>
+                <a class="underlineHover" href="#" onclick="MostrarModal('ForgetPassword')">Olvidaste tu contraseña?</a>
                 <div class="form-inline">
                     <a>Eres nuevo?</a>
                     <a class="underlineHover" id="register" onclick="MostrarModal('Registro')">Registrate !</a>
@@ -50,14 +50,12 @@
         <div class="modal-content">
             <div class="modal-header">
             <h1 class="modal-titl">Registro</h1>
-            <img src="img/MedcinTime_LOGO.png" id="modalIcon" alt="MedcinTime" />
             </div>
             <div class="modal-body">
                 <section class="form-register">
                     <h1>FORMULARIO DE REGISTRO</h1>
                     <div class="controles">
                         <div class="col-lg">
-                            <h2>Usuario</h2>
                             <label>Correo electronico:</label><br>
                             <input class="controls" type="email" name="emailR" id="emailR" placeholder="Ingrese su email"><br>
                             <label>Contraseña: <button class="btn btn-info" id="ver" onclick="Mostrar()">Ver</button></label><br>
@@ -68,19 +66,39 @@
                         <br>
                     </div>
                 <div class="regist">
-                    <p><input type="checkbox" id="terminos">Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p><br>
-                    <p><a href="#" onclick="OcultarModal('Registro')" style="color:rgb(0, 255, 221)">¿Ya tengo cuenta?</a></p>
+                    <p id="terminos_condiciones"><input type="checkbox" id="terminos">Estoy de acuerdo con <a href="#" style="color: black;">Terminos y Condiciones</a></p><br>
                 </div>
                 </section>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal('Registro')">Cancelar</button>
-            <button type="button" class="btn btn-primary modalRegistro" id="btnregistrar" onclick="Registro()">Registrarse</button>
+            <button type="button" class="btn btn-primary modalRegistro" style="background-color: rgb(7, 161, 212);" data-dismiss="modal" onclick="OcultarModal('Registro')">Cancelar</button>
+            <button type="button" class="btn btn-outline-info modalRegistro" style="background-color: white;" id="btnregistrar" onclick="Registro()">Registrarse</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalForgetPassword" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" id="modal_header">
+            <h1 class="modal-title">Olvidé mi contraseña</h1>
+            </div>
+            <div  id="modal_body" class="modal-body" style="text-align: center;">
+                <section class="form-reset">
+                    <h2 style="color: rgb(60, 140, 160);">Ingrese su dirección de correo electronico</h2>
+                    <div id="controls_reset">
+                        <input type="email" id="email1" class="fadeIn second"  placeholder="E-mail">
+                        <input type="button" class="fadeIn fourth" value="Restablecer" onclick="ResetPassword()">
+                    </div>
+                    <h2 id="label_forget" style="color: crimson; height: 2rem;">Se ha enviado una notificación a su dirección de correo electronico, verifique su bandeja de entrada.</h2>
+                </section>
+            <div class="modal-footer" id="modal_footer">
+                <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal('ForgetPassword')">Cancelar</button>
             </div>
         </div>
         </div>
     </div>
     <script src="javascript/main_firebase.js"></script>
-    <script src="javascript/LoggedIn_Login.js"></script>
+    <!--<script src="javascript/LoggedIn_Login.js"></script>-->
 </body>
 </html>

@@ -13,6 +13,15 @@ a {
     text-decoration: none;
     font-weight: 400;
 }
+p{
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5em;
+    width: 90%;
+}
+#controls_reset{
+    width: 100%;
+    height: 15rem;
+}
 
 h2 {
     text-align: center;
@@ -34,7 +43,7 @@ h2 {
     padding: 2%;
 }
 
-#formContent {
+#formContent,#formContent1 {
     -webkit-border-radius: 0.625em 0.625em 0.625em 0.625em;
     border-radius: 0.625em 0.625em 0.625em 0.625em;
     background: #fff;
@@ -49,7 +58,7 @@ h2 {
     text-align: center;
 }
 
-#formFooter {
+#formFooter,#formFooter1 {
     background-color: #f6f6f6;
     border-top: 1% solid #dce8f1;
     max-width: 30em;
@@ -60,7 +69,20 @@ h2 {
     border-radius: 0 0 0.625em 0.625em;
 }
 
+#email1{
+    width: 90%;
+}
 
+#modal_body{
+    background-color: white;
+}
+#modal_header{
+    background-color: rgb(56, 134, 144);
+    color: white;
+}
+#modal_footer{
+    background-color: white;
+}
 h2.inactive {
     color: #cccccc;
 }
@@ -281,8 +303,12 @@ input[type=email], input[type=password] {
     outline: none;
 }
 
-#icon {
+#icon{
     width: 60%;
+}
+#icon1 {
+    width: 100%;
+    float: left;
 }
 
 #btnGoogle {
