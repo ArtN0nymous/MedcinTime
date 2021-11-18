@@ -1,2 +1,0 @@
-# MedcinTime
-Prueba de repositorio
