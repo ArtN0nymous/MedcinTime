@@ -39,6 +39,10 @@ firebase.initializeApp({
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           // User logged in already or has just logged in.
+          let verifystatus = user.emailVerified;
+          if(verifystatus != true){
+            alert('Verifica tu correo, se envió un elace de verificación a tu dirección de correo electronico');
+          }
           user_uid = user.uid;
           storageRef = firebase.storage().ref("Medicamentos_"+user_uid);
           if(document.getElementById('usuario_medicamentos')){
@@ -87,7 +91,8 @@ firebase.initializeApp({
                             mail: email
                         })
                         .then((docRef) => {
-                            window.location.href = "../index.html";
+                            VerifyEmail();
+                            window.location.href = "../index.html";          
                         })
                         .catch((error) => {
                             alert("Error adding document: ", error);
@@ -129,6 +134,15 @@ firebase.initializeApp({
         return false; 
     }
   }
+
+function VerifyEmail(){
+    firebase.auth().currentUser.sendEmailVerification()
+  .then(() => {
+    
+  }).catch((error)=>{
+      alert("Error: "+error.message);
+  });
+}
 function Acceder(){
     var email = $("#email").val();
     var password = $("#password").val();
