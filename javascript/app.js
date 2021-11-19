@@ -103,6 +103,17 @@ function Editar(oper,id){
     }
     
 }
+
+function Mostrar(){
+    var tipo = document.getElementById("passwordR");
+      if(tipo.type == "password"){
+          tipo.type = "text";
+          $("#password_vf").attr('type','text');
+      }else{
+          tipo.type = "password";
+          $("#password_vf").attr('type','password');
+      }
+}
 function Alertas(Tipo,nombre_campo,objeto,message){
     //Tipo 1: Campos vacios que debe llenar el usuario
     //Tipo 2: Campos vacios que tienen un default pero algo salió mal
