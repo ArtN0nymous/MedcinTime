@@ -9,7 +9,27 @@ firebase.initializeApp({
   });
   //referencias e instancias de Firebase
   var db = firebase.firestore();
-  firebase.auth().languageCode = 'it';
+  var ln = navigator.language || navigator.userLanguage;
+  switch(ln.substr(0,2)){
+    case 'es':
+        firebase.auth().languageCode = 'es';
+        break;
+    case 'en':
+        firebase.auth().languageCode = 'en';
+        break;
+    case 'it':
+        firebase.auth().languageCode = 'it';
+        break;
+    case 'de':
+        firebase.auth().languageCode = 'de';
+        break;
+    case 'pt':
+        firebase.auth().languageCode = 'pt';
+        break;
+    case 'zh':
+        firebase.auth().languageCode = 'zh';
+        break;
+  }
   var provider = new firebase.auth.GoogleAuthProvider();
   var storageRef = "";
   //var analitycs = firebase.analitycs();
@@ -117,6 +137,7 @@ function Acceder(){
     // Signed in
     var user = userCredential.user.uid;
     alert("Bienvenido a MedcinTime !" + user);
+    window.location.href="../index.html";
     // ...
   })
   .catch((error) => {
@@ -144,6 +165,9 @@ function ResetPassword(){
             if(document.getElementById('label_forget')){
                 document.getElementById('label_forget').style.display = ""
             }
+            let btn = document.getElementById('btn_cancel_reset');
+            $("#btn_cancel_reset").attr("class",'btn btn-success modalRegistro');
+            btn.innerHTML = "Aceptar";
         }).catch((error)=>{
             Alertas('4','','Reset password',error.message);
         });
@@ -162,7 +186,6 @@ function AccesoGoogle(){
     var token = credential.accessToken;
     // The signed-in user info.
     var user = result.user.uid;
-    debugger
     alert("Bienvenido a MedcinTime: " + user);
     window.location.href = "../index.html";
   }).catch((error) => {
