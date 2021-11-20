@@ -241,8 +241,8 @@ function Guardar(oper){
             let contenido = $("#contenido").val();
             let contenido_unidad = $("#contenido_u").val();
             let dosis_unidad = $("#dosis_u").val();
-            let dosis_R = $("#Dosis_R").val();
-            let dosis_Ru = $("#Dosis_Ru").val();
+            //let dosis_R = $("#Dosis_R").val();
+            //let dosis_Ru = $("#Dosis_Ru").val();
             if($("#Fecha_esp").is(':checked')) {
                 fecha_regist =  $("#fecha_input").val();
             } else {
@@ -255,34 +255,22 @@ function Guardar(oper){
                         if(contenido != ""){
                             if(dosis_unidad != ""){
                                 if(contenido_unidad != ""){
-                                    if(dosis_R != ""){
-                                        if(dosis_Ru != ""){
-                                            db.collection("userM_"+user_uid).add({
-                                                medicamento: medicamento,
-                                                dosis: dosis,
-                                                contenido:  contenido,
-                                                contenido_unidad:  contenido_unidad,
-                                                dosis_unidad: dosis_unidad,
-                                                dosis_R: dosis_R,
-                                                dosis_Ru:dosis_Ru,
-                                                fecha_regist: fecha_regist,
-                                                url: url
-                                            })
-                                            .then((docRef) => {
-                                                Alertas('3','','Medicamento','');
-                                                window.location.href = "../Catalogo_med.html";
-                                            })
-                                            .catch((error) => {
-                                                Alertas('4','','Medicamento',error.message);
-                                            });
-                                        }else{
-                                            Alertas('2','Dosis_unidad','','');
-                                            break;
-                                        }
-                                    }else{
-                                        Alertas('1','Dosis','','');
-                                        break;
-                                    }
+                                    db.collection("userM_"+user_uid).add({
+                                        medicamento: medicamento,
+                                        dosis: dosis,
+                                        contenido:  contenido,
+                                        contenido_unidad:  contenido_unidad,
+                                        dosis_unidad: dosis_unidad,
+                                        fecha_regist: fecha_regist,
+                                        url: url
+                                    })
+                                    .then((docRef) => {
+                                        Alertas('3','','Medicamento','');
+                                        window.location.href = "../Catalogo_med.html";
+                                    })
+                                    .catch((error) => {
+                                        Alertas('4','','Medicamento',error.message);
+                                    });
                                 }else{
                                     Alertas('1','Contenido por unidad','','');
                                     break;
