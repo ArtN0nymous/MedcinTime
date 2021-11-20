@@ -232,6 +232,7 @@ function Guardar_Perfil(){
 //Medicamentos
 function Guardar(oper){
     verificar_loggedIn();
+    var user = $("#usuario_medicamentos").val();
     switch(oper){
         case 'ME':
             var url = $("#url_imagen").val();
@@ -255,22 +256,24 @@ function Guardar(oper){
                         if(contenido != ""){
                             if(dosis_unidad != ""){
                                 if(contenido_unidad != ""){
-                                    db.collection("userM_"+user_uid).add({
-                                        medicamento: medicamento,
-                                        dosis: dosis,
-                                        contenido:  contenido,
-                                        contenido_unidad:  contenido_unidad,
-                                        dosis_unidad: dosis_unidad,
-                                        fecha_regist: fecha_regist,
-                                        url: url
-                                    })
-                                    .then((docRef) => {
-                                        Alertas('3','','Medicamento','');
-                                        window.location.href = "../Catalogo_med.html";
-                                    })
-                                    .catch((error) => {
-                                        Alertas('4','','Medicamento',error.message);
-                                    });
+                                    if(user != "" && user != null){
+                                        db.collection("userM_"+user).add({
+                                            medicamento: medicamento,
+                                            dosis: dosis,
+                                            contenido:  contenido,
+                                            contenido_unidad:  contenido_unidad,
+                                            dosis_unidad: dosis_unidad,
+                                            fecha_regist: fecha_regist,
+                                            url: url
+                                        })
+                                        .then((docRef) => {
+                                            //Alertas('3','','Medicamento','');
+                                            window.location.href = "../Catalogo_med.html";
+                                        })
+                                        .catch((error) => {
+                                            Alertas('4','','Medicamento',error.message);
+                                        });
+                                    }
                                 }else{
                                     Alertas('1','Contenido por unidad','','');
                                     break;
