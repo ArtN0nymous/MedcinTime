@@ -31,7 +31,7 @@ firebase.initializeApp({
         break;
   }
   var provider = new firebase.auth.GoogleAuthProvider();
-  var storageRef = "";
+  var storageRef = firebase.storage().ref();
   //var analitycs = firebase.analitycs();
   //variables publicas
   var user_uid = "";
