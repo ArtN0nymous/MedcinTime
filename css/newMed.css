@@ -29,6 +29,7 @@ body{
 }
 .contact-form{
     background: rgb(245, 247, 248);
+    min-height:50vh ;
 }
 .contact-form form .block{
     grid-column: 1 / 3;
@@ -38,9 +39,9 @@ body{
     padding: 1em;
 } 
 button,
-#medicamento,
-#contenido,
-#contenido_u{
+.nombre,
+.neto,
+.contenido{
     width: 100%; 
     padding: .7em;
     border: none;
@@ -50,7 +51,7 @@ button,
     border-bottom: 1px solid #0093E9;
 }
 #dosis,
-#Dosis_R{
+#dosis2{
     width: 50%; 
     padding: .7em;
     border: none;
@@ -59,8 +60,8 @@ button,
     color: rgb(12, 12, 12);
     border-bottom: 1px solid #0093E9;
 }
-#Dosis_Ru,
-#dosis_u{
+.select,
+#select2{
     width: 70%; 
     text-align: center;
     padding: .7em;
@@ -95,9 +96,38 @@ button{
 .contact-info ul li{
     padding: .3em;
 }
-#img{
+.imagen{
     width: 100%;
 }
+
+.fijarRecordatorioButton
+{
+    border: 1px solid black;
+    color: black;
+    width: 70%;
+    text-align: center;
+    border-radius: 5rem;
+    border-bottom:1px solid #0093E9;
+}
+.btn-grad {background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
 @media (min-width: 700px){
     body{
         padding: 0%;
