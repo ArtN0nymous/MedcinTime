@@ -248,7 +248,7 @@ function Guardar(oper){
                 fecha_regist =  $("#fecha_input").val();
             } else {
                 fecha_regist = new Date();
-                fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
+                //fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
             }
             if(url != ""){
                 if(medicamento != ""){
