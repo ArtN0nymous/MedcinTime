@@ -1,129 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDM</title>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3-pr5646.6d9dd3616/firebase-storage-compat.min.js"></script>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="css/newMed.css">
-    <link rel="stylesheet" href="css/recordatorioModal.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-   <script src="https://kit.fontawesome.com/5305b20e95.js " crossorigin="anonymous "></script>
-   <script src="javascript/app.js"></script>
-</head>
-<body>
-   <div class="navbarContainer" style="position: static;"></div>
-  <div class="container-fluid">
-        <div class="contact-wrapper">
-            <div class="contact-form">
-               <center><h3>Registra un nuevo medicamento</h3></center> 
-               <br>
-                    <div class="row">
-                        <div class="col-sm">
-                            <label for="nombre">Nombre del Medicamento</label>
-                            <input type="text" name="Medicamento" id="medicamento" placeholder="Escriba el nombre del medicamento" class="nombre" >
-                        <br>
-                        <br>
-                        </div>
-                        <div class="col-sm">
-                          <label for="neto">Contenido Neto</label>
-                          <input type="number" id="contenido" name="Neto" class="neto" placeholder="Escriba el contenido neto de la caja de medicamento">
-                          <div class="col">
-                            <select id="dosis" class="select" required="required" style="width: 100%;">
-                              <option selected="true" value="">Unidad neta</option>
-                              <option value="ml">ml</option>
-                              <option value="mg">mg</option>
-                              <option value="µg">µg</option>
-                              <option value="Tabletas">Tabletas</option>
-                              <option value="Parches">Parches</option>
-                              <option value="g">g</option>
-                              <option value="Cápsulas">Cápsulas</option>
-                              <option value="Ampolleta_ampula">Ampolleta o Ámpula</option>
-                              <option value="Cucharadita">Cucharadita</option>
-                              <option value="Cucharada">Cucharada</option>
-                          </select>
-                           </div> 
-                           <br>
-                        </div>
-                              
-                   
-                  <div class="row">
-                      <div class="col-sm">
-                        <label for="dosis">Dosis</label>
-                        <input type="text" name="Medicamento" id="dosis_unidad" placeholder="Escriba la catidad que desea tomar" class="nombre" >
-                      </div>
-                      <br>
-                      <div class="col-sm">
-                        <label for="contenido" >Contenido por Unidad</label> 
-                        <input type="number" name="contenido" id="contenido_u" class="contenido">
-                        <input type="hidden" id="usuario_medicamentos">                                             
-                     </div>                      
-                   </div>
-                   
-                   <div class="row">
-                     <div class="col">
-                      <select id="dosis_u" class="select" required="required" style="width: 100%;">
-                        <option selected="true" value="">Seleccione una unidad de medida...</option>
-                        <option value="ml">ml</option>
-                        <option value="mg">mg</option>
-                        <option value="µg">µg</option>
-                        <option value="Tabletas">Tabletas</option>
-                        <option value="Parches">Parches</option>
-                        <option value="g">g</option>
-                        <option value="Cápsulas">Cápsulas</option>
-                        <option value="Ampolleta_ampula">Ampolleta o Ámpula</option>
-                        <option value="Cucharadita">Cucharadita</option>
-                        <option value="Cucharada">Cucharada</option>
-                    </select>
-                     </div> 
-                   </div>
-                  
-                   <div class="row">
-                     <div class="col-sm">
-                       <br>
-                      <input id="file_selector" type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" onchange="subir_img();">
-                      <input type="hidden" id="url_imagen"> 
-                    </div>
-                     <div class="col-sm">
-                       <br>
-                      <label>Seleccionar una fecha de registro (Fecha actual): 
-                        <input type="checkbox" onchange="Checks('NM')" name="checkbox"id="Fecha_esp"></label>
-                        <br> 
-                      <input type="datetime-local" id="fecha_input">
-                     </div>
-                   </div>
-                </div>
-                    <div class="row" style="margin-top: 2rem;">
-                        <div class="col-6">
-                          <button class="btn btn-info btn-grad" onclick="Guardar('ME')">Guardar</button>
-                        </div>
-                        <div class="col-6">
-                          <button class="btn btn-danger btn-grad" onclick="Cerrar_sesion()">Salir</button>
-                        </div>
-                
-                    </div>
-              
-             
-            </div>
-        <div class="contact-info">
-            <p>
-               
-                <img id="img" src="img/picture_icon.png"  class="imagen">
-            </p>
-        </div>
-        </div>
-    </div>
-    
 
-</div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RDM</title>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3-pr5646.6d9dd3616/firebase-storage-compat.min.js"></script>
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="css/newMed.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/5305b20e95.js " crossorigin="anonymous "></script>
+  <script src="javascript/app.js"></script>
+</head>
+
+<body>
+  <div class="navbarContainer" style="position: static;"></div>
+  <div class="container-fluid">
+    <div class="contact-wrapper">
+      <div class="contact-form">
+        <center>
+          <h3>Registra un nuevo medicamento</h3>
+        </center>
+        <br>
+        <div class="row">
+          <div class="col-sm">
+            <label for="nombre"  class="lblBold">Nombre del Medicamento</label>
+            <input type="text" name="Medicamento" id="medicamento" placeholder="Escriba el nombre del medicamento"
+              class="nombre">
+            <br>
+            <br>
+          </div>
+          <div class="col-sm">
+            <label for="neto"  class="lblBold">Contenido Neto</label>
+            <input type="number" id="contenido" name="Neto" class="neto"
+              placeholder="Escriba el contenido neto de la caja de medicamento">
+            <div class="col">
+              <select id="dosis" class="select" required="required" style="width: 100%;">
+                <option selected="true" value="">Unidad neta</option>
+                <option value="ml">ml</option>
+                <option value="mg">mg</option>
+                <option value="µg">µg</option>
+                <option value="Tabletas">Tabletas</option>
+                <option value="Parches">Parches</option>
+                <option value="g">g</option>
+                <option value="Cápsulas">Cápsulas</option>
+                <option value="Ampolleta_ampula">Ampolleta o Ámpula</option>
+                <option value="Cucharadita">Cucharadita</option>
+                <option value="Cucharada">Cucharada</option>
+              </select>
+            </div>
+            <br>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm">
+              <label for="dosis" class="lblBold">Dosis</label>
+              <input type="text" name="Medicamento" id="dosis_unidad" placeholder="Escriba la catidad que desea tomar"
+                class="nombre">
+            </div>
+            <br>
+            <div class="col-sm">
+              <label for="contenido"  class="lblBold">Contenido por Unidad</label>
+              <input type="number" name="contenido" id="contenido_u" class="contenido" placeholder="Escriba los miligramos o los gramos por cada unidad"> 
+              <input type="hidden" id="usuario_medicamentos">
+
+                <select id="dosis_u" class="select" required="required" style="width: 100%;">
+                  <option selected="true" value="">Seleccione una unidad de medida...</option>
+                  <option value="ml">ml</option>
+                  <option value="mg">mg</option>
+                  <option value="µg">µg</option>
+                  <option value="Tabletas">Tabletas</option>
+                  <option value="Parches">Parches</option>
+                  <option value="g">g</option>
+                  <option value="Cápsulas">Cápsulas</option>
+                  <option value="Ampolleta_ampula">Ampolleta o Ámpula</option>
+                  <option value="Cucharadita">Cucharadita</option>
+                  <option value="Cucharada">Cucharada</option>
+                </select>
+          
+            
+          </div>
+
+          <div class="row">
+            
+            </div>
+          </div>
+
+          <div class="row " style="margin-top: 2rem;">
+            <div class="col-sm">
+              <label for="neto" class="lblBold">Tomar cada:</label>
+              <input type="number" name="cadaHoras" placeholder="Ej. Cada 4 horas"
+                class="contenido">
+            </div>
+            <div class="col-sm">
+             
+              <center><label for=""  class="lblBold"> Elija los dias que desea recibir los recodatorios</label></center>
+              <div class="row">
+                <div class="col">
+                  <label for="lunes" class="lblDias">Lun</label>
+                  <input type="checkbox" name="lunes" id="cbLunes" class="cbDias" value="L">
+                </div>
+                <div class="col">
+                  <label for="martes" class="lblDias">Mar</label>
+                  <input type="checkbox" name="martes" id="cbMartes" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="miercoles" class="lblDias">Mie</label>
+                  <input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="jueves" class="lblDias">Jue</label>
+                  <input type="checkbox" name="jueves" id="cbJueves" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="viernes" class="lblDias">Vie</label>
+                  <input type="checkbox" name="viernes" id="cbViernes" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="sabado" class="lblDias">Sab</label>
+                  <input type="checkbox" name="sabado" id="cbSabado" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="domingo" class="lblDias">Dom</label>
+                  <br>
+                  <input type="checkbox" name="domingo" id="cbDomingo" class="cbDias">
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm">
+              <br>
+              <input id="file_selector" type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                onchange="subir_img();">
+              <input type="hidden" id="url_imagen">
+            </div>
+            <div class="col-sm">
+              <br>
+              <label>Seleccione una fecha y hora para comenzar el tratamiento (Opcional):
+                <input type="checkbox" onchange="Checks('NM')" name="checkbox" id="Fecha_esp"></label>
+              <br>
+              <input type="datetime-local" id="fecha_input">
+            </div>
+          </div>
+
+        </div>
+        <div class="row" style="margin-top: 2rem;">
+          <div class="col-6">
+            <button class="btn btn-info btn-grad" onclick="Guardar('ME')">Guardar</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-danger btn-grad" onclick="Cerrar_sesion()">Salir</button>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="contact-info">
+        <p>
+
+          <img id="img" src="img/picture_icon.png" class="imagen">
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
 
   <script>
     $(document).ready(function () {
@@ -132,7 +189,7 @@
   </script>
   <script src="javascript/main_firebase.js"></script>
   <script src="javascript/LoggedIn.js"></script>
-   
+
 </body>
- 
+
 </html>

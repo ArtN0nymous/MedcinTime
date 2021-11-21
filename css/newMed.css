@@ -122,7 +122,17 @@ button{
    border-radius: 10px;
    display: block;
  }
-
+.cbDias{
+    width: 1.5rem;
+    height: 1.5rem;
+    border-color: #0093E9;
+    vertical-align: middle;
+    margin: 0 auto;
+    border-radius: 50px;
+}
+.lblBold{
+    font-weight: bold;
+}
  .btn-grad:hover {
    background-position: right center; /* change the direction of the change here */
    color: #fff;

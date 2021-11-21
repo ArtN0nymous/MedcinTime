@@ -126,8 +126,15 @@ a{
 }
 
 .pie .icon2{
+	border-radius: 50%;  
+    float: right;
+    width: 40px;
+    height: 40px;   
+    margin-top: 1.09375rem;  
+      
+}
+.pie .icon3{
 	border-radius: 50%;
-    
     float: right;
     width: 40px;
     height: 40px;   
