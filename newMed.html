@@ -12,11 +12,13 @@
   <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3-pr5646.6d9dd3616/firebase-storage-compat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3-pr5646.6d9dd3616/firebase-storage-compat.min.js"></script>
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/navbar.css">
   <link rel="stylesheet" href="css/newMed.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -27,6 +29,9 @@
 </head>
 
 <body>
+  <dialog id="load_dialog">
+    <img>
+  </dialog>
   <div class="navbarContainer" style="position: static;"></div>
   <div class="container-fluid">
     <div class="contact-wrapper">
@@ -98,72 +103,48 @@
 
           </div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="modalRecordatorio" tabindex="-1" role="dialog"
-            aria-labelledby="modalRecordatorioLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Recordatorio</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+          <div class="row " style="margin-top: 2rem;">
+            <div class="col-sm">
+              <label for="neto" class="lblBold">Tomar cada:</label>
+              <input type="number" id="cadaHoras" name="cadaHoras" placeholder="Ej. Cada 4 horas"
+                class="contenido">
+            </div>
+            <div class="col-sm">
+             
+              <center><label for=""  class="lblBold"> Elija los dias que desea recibir los recodatorios</label></center>
+              <div class="row">
+                <div class="col">
+                  <label for="lunes" class="lblDias">Lun</label>
+                  <input type="checkbox" name="lunes" id="cbDia_1_" class="cbDias" value="L">
                 </div>
-                <div class="modal-body">
-                  <div class="row " style="margin-top: 2rem;">
-                    <div class="col-sm">
-                      <label for="neto" class="lblBold">Tomar cada:</label>
-                      <input type="number" name="cadaHoras" placeholder="Ej. Cada 4 horas" class="contenido">
-                    </div>
-                    <div class="col-sm">
-
-                      <center><label for="" class="lblBold"> Elija los dias que desea recibir los recodatorios</label>
-                      </center>
-                      <div class="row">
-
-                        <div class="col-md-2">
-                          <label for="lunes" class="lblDias">Lun</label>
-                          <input type="checkbox" name="lunes" id="cbLunes" class="cbDias" value="L">
-                        </div>
-                        <div class="col-md-2">
-                          <label for="martes" class="lblDias">Mar</label>
-                          <input type="checkbox" name="martes" id="cbMartes" class="cbDias">
-                        </div>
-                        <div class="col-md-2">
-                          <label for="miercoles" class="lblDias">Mie</label>
-                          <input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias">
-                        </div>
-                        <div class="col-m-2">
-                          <label for="jueves" class="lblDias">Jue</label>
-                          <input type="checkbox" name="jueves" id="cbJueves" class="cbDias">
-                        </div>
-                        <div class="col-md-2">
-                          <label for="viernes" class="lblDias">Vie</label>
-                          <input type="checkbox" name="viernes" id="cbViernes" class="cbDias">
-                        </div>
-                        <div class="col-md-1">
-                          <label for="sabado" class="lblDias">Sab</label>
-                          <input type="checkbox" name="sabado" id="cbSabado" class="cbDias">
-                        </div>
-                        <div class="col-md-1">
-                          <label for="domingo" class="lblDias">Dom</label>
-
-                          <input type="checkbox" name="domingo" id="cbDomingo" class="cbDias">
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
+                <div class="col">
+                  <label for="martes" class="lblDias">Mar</label>
+                  <input type="checkbox" name="martes" id="cbDia_2_" class="cbDias">
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="col">
+                  <label for="miercoles" class="lblDias">Mie</label>
+                  <input type="checkbox" name="miercoles" id="cbDia_3_" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="jueves" class="lblDias">Jue</label>
+                  <input type="checkbox" name="jueves" id="cbDia_4_" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="viernes" class="lblDias">Vie</label>
+                  <input type="checkbox" name="viernes" id="cbDia_5_" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="sabado" class="lblDias">Sab</label>
+                  <input type="checkbox" name="sabado" id="cbDia_6_" class="cbDias">
+                </div>
+                <div class="col">
+                  <label for="domingo" class="lblDias">Dom</label>
+                  <br>
+                  <input type="checkbox" name="domingo" id="cbDia_7_" class="cbDias">
                 </div>
               </div>
             </div>
           </div>
-          <!-- Fin del modal -->
-
           <div class="row">
 
             <div class="col-sm">
@@ -184,10 +165,10 @@
         </div>
         <div class="row" style="margin-top: 2rem;">
           <div class="col-6">
-            <button class="btn btn-info btn-grad" onclick="Guardar('ME')">Guardar</button>
+            <button class="btn btn-info btn-grad" onclick="Guardar()">Guardar</button>
           </div>
           <div class="col-6">
-            <button class="btn btn-danger btn-grad" onclick="Cerrar_sesion()">Salir</button>
+            <button class="btn btn-danger btn-grad" onclick="Cancelar();">Cancelar</button>
           </div>
 
         </div>

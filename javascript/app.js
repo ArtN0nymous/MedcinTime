@@ -62,7 +62,7 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
-function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis,num ){
+function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma){
     var  card= document.getElementById("tabla_body").innerHTML += 
 				 `<div class='col-md-4 mt-3'>
                  <div class='tarjeta'>
@@ -78,32 +78,23 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 						<img class="foto" src="${medImageURL}" alt="">
 						<h2>Te queda(n) 1 dosis</h2>
 						<div class="tareas">
-							<a class="link" href="">${numeroDosis} dosis el ${diaToma}</a>
+							<a class="link" href="">${diaToma}</a>
 						</div>
 					</div>
 				</div>
 	
 				<div class="pie">	
-                    <span class="icon3"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
+                    <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
 					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
-					<span class="icon3" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-2x"></i></span>
+					<span class="icon3" onclick="Editar('${id}')"><i class="fa fa-pencil fa-2x"></i></span>
                     
 				</div>
                 </div>
 			</div> `
 }
-function Editar(oper,id){
-    switch(oper){
-        case'MD':
-            MostrarModal('EditarMed');
-            Consultas('MD',id);
-            break;
-        case 'RE':
-            MostrarModal('EditarRec');
-            Consultas('RE',id);
-            break;
-    }
-    
+function Editar(id){
+    MostrarModal('EditarMed');
+    Consultas(id);
 }
 
 function Mostrar(){
@@ -138,12 +129,78 @@ function Alertas(Tipo,nombre_campo,objeto,message){
         case '5':
             alert(message + " ###OBJETO: " + objeto + " ###CAMPO: " + nombre_campo);
             break;
+        case '6':
+            alert(objeto + " eliminado correctamente !");
+            break;
     }
 }
 function Ventanas(nombre){
     switch(nombre){
         case 'index':
             window.location.href = "../index.html";
+            break;
+        case 'Medicamentos':
+            window.location.href = "../Catalogo_med.html";
+            break;
+    }
+}
+function Cancelar(){
+    let url = $("#url_imagen").val();
+    BorrarIMG(url);
+    Ventanas('Medicamentos');
+}
+function Dias(){
+    let Dias = "";
+    for(var i= 0; i<8;i++){
+        if($("#cbDia_"+i+"_").is(':checked')){
+            switch(i.toString()){
+                case '1':
+                    Dias += 'Lunes,';
+                    break;
+                case '2':
+                    Dias += 'Martes,';
+                    break;
+                case '3':
+                    Dias += 'Miercoles,';
+                    break;
+                case '4':
+                    Dias += 'Jueves,';
+                    break;
+                case '5':
+                    Dias += 'Viernes,';
+                    break;
+                case '6':
+                    Dias += 'Sabado,';
+                    break;
+                case '7':
+                    Dias += 'Domingo,';
+                    break;
+            }
+        }
+    }
+    var listDias = Dias.substring(0,Dias.length - 1);
+    if(listDias == ""){
+        Alertas('1','Dias de recordatorio','','');
+    }
+    return listDias;
+}
+
+function MostrarDialog(nombre){
+    switch(nombre){
+        case 'load_dialog':
+            $("#load_dialog").dialog({
+                title:'Cargando',
+                draggable:false,
+                resizable:false,
+                modal:true
+            });
+            break;
+    }
+}
+function CerrarDialog(nombre){
+    switch(nombre){
+        case 'load_dialog':
+            $("#load_dialog").dialog('hide');
             break;
     }
 }
