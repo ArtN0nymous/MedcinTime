@@ -84,7 +84,7 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 				</div>
 	
 				<div class="pie">	
-                    <span class="icon3"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
+                    <span class="icon3" onclick="Borrar('${id}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
 					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
 					<span class="icon3" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-2x"></i></span>
                     
@@ -137,6 +137,9 @@ function Alertas(Tipo,nombre_campo,objeto,message){
             break;
         case '5':
             alert(message + " ###OBJETO: " + objeto + " ###CAMPO: " + nombre_campo);
+            break;
+        case '6':
+            alert(objeto + " eliminado correctamente !");
             break;
     }
 }

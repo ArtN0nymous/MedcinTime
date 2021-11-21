@@ -483,6 +483,19 @@ function Actualizar(oper){
             break;
     }
 }
+
+function Borrar(id){
+    let user = $("#usuario_medicamentos").val();
+    if(id != "" && id != null && user != "" && user != null){
+        db.collection("userM_"+user).doc(id).delete().then(function(){
+            Alertas('6','','Medicamento','');
+        }).catch(function(error){
+            Alertas('4','','Medicamento',error.message);
+        });
+    }else{
+        Alertas('2','id o usuario','','');
+    }
+}
   /*
 //Eliminar documento
 function Borrar(id){
