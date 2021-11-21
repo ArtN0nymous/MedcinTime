@@ -341,7 +341,7 @@ function Guardar(oper){
 function subir_img(){
     var file = selectIMG();
     var url = "";
-    storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
+    storageRef.child('Imagenes/').put(file).then(function(snapshot){
         //alert("Exitoso!");
         snapshot.ref.getDownloadURL().then(function(imgurl){
             url = imgurl;
