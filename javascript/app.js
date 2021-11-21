@@ -184,3 +184,23 @@ function Dias(){
     }
     return listDias;
 }
+
+function MostrarDialog(nombre){
+    switch(nombre){
+        case 'load_dialog':
+            $("#load_dialog").dialog({
+                title:'Cargando',
+                draggable:false,
+                resizable:false,
+                modal:true
+            });
+            break;
+    }
+}
+function CerrarDialog(nombre){
+    switch(nombre){
+        case 'load_dialog':
+            $("#load_dialog").dialog('hide');
+            break;
+    }
+}
