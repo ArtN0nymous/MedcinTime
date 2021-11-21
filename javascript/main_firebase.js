@@ -240,6 +240,12 @@ function Guardar(){
     let contenido = $("#contenido").val();
     let contenido_unidad = $("#contenido_u").val();
     let dosis_unidad = $("#dosis_u").val();
+    let cadaHoras = $("#cadaHoras").val();
+    if(cadaHoras == ""){
+        Alertas('1','Tomar cada','','');
+        return;
+    }
+    let listDias = Dias();
     //let dosis_R = $("#Dosis_R").val();
     //let dosis_Ru = $("#Dosis_Ru").val();
     if($("#Fecha_esp").is(':checked') && $("#fecha_input").val() != "") {
@@ -262,6 +268,8 @@ function Guardar(){
                                     contenido_unidad:  contenido_unidad,
                                     dosis_unidad: dosis_unidad,
                                     fecha_regist: fecha_regist,
+                                    tomarCda: cadaHoras,
+                                    diasRecordar: listDias,
                                     url: url
                                 })
                                 .then((docRef) => {
@@ -293,7 +301,7 @@ function Guardar(){
             return;
         }
     }else{
-        Alertas('5','url_imagen','Medicamento','Ocurrió un error, debe selecionar una imagen valida');
+        Alertas('1','Imagen','','');
         return;
     }
 }

@@ -149,3 +149,38 @@ function Cancelar(){
     BorrarIMG(url);
     Ventanas('Medicamentos');
 }
+function Dias(){
+    let Dias = "";
+    for(var i= 0; i<8;i++){
+        if($("#cbDia_"+i+"_").is(':checked')){
+            switch(i.toString()){
+                case '1':
+                    Dias += 'Lunes,';
+                    break;
+                case '2':
+                    Dias += 'Martes,';
+                    break;
+                case '3':
+                    Dias += 'Miercoles,';
+                    break;
+                case '4':
+                    Dias += 'Jueves,';
+                    break;
+                case '5':
+                    Dias += 'Viernes,';
+                    break;
+                case '6':
+                    Dias += 'Sabado,';
+                    break;
+                case '7':
+                    Dias += 'Domingo,';
+                    break;
+            }
+        }
+    }
+    var listDias = Dias.substring(0,Dias.length - 1);
+    if(listDias == ""){
+        Alertas('1','Dias de recordatorio','','');
+    }
+    return listDias;
+}
