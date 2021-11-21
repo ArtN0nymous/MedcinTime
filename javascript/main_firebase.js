@@ -247,7 +247,7 @@ function Guardar(oper){
             if($("#Fecha_esp").is(':checked') && $("#fecha_input").val() != "") {
                 fecha_regist =  $("#fecha_input").val();
             } else {
-                fecha_regist = new Date();
+                fecha_regist = new Date().toLocaleDateString();
                 //fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
             }
             if(url != ""){
@@ -341,7 +341,7 @@ function Guardar(oper){
 function subir_img(){
     var file = selectIMG();
     var url = "";
-    storageRef.child('Imagenes/').put(file).then(function(snapshot){
+    storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
         //alert("Exitoso!");
         snapshot.ref.getDownloadURL().then(function(imgurl){
             url = imgurl;
@@ -483,8 +483,7 @@ function Actualizar(oper){
             break;
     }
 }
-
-function Borrar(id){
+function Borrar(id,url){
     let user = $("#usuario_medicamentos").val();
     if(id != "" && id != null && user != "" && user != null){
         db.collection("userM_"+user).doc(id).delete().then(function(){
@@ -492,9 +491,28 @@ function Borrar(id){
         }).catch(function(error){
             Alertas('4','','Medicamento',error.message);
         });
+        BorrarIMG(url);
     }else{
         Alertas('2','id o usuario','','');
     }
+}
+function BorrarIMG(url){
+    if(url != "" && url != null){
+        var imgRef = firebase.storage().refFromURL(url);
+        imgRef.delete().then(function() {
+            alert('Imagen eliminada');
+        }).catch(function(error) {
+            alert('Error: '+error.message);     
+        });
+    }else{
+        Alertas('Error, no hay una url de imagen cargada');
+        return;
+    }
+}
+function Cancelar(){
+    let url = $("#url_imagen").val();
+    BorrarIMG(url);
+    Ventanas('Medcicamentos');
 }
   /*
 //Eliminar documento

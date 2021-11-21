@@ -84,7 +84,7 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 				</div>
 	
 				<div class="pie">	
-                    <span class="icon3" onclick="Borrar('${id}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
+                    <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
 					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
 					<span class="icon3" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-2x"></i></span>
                     
@@ -147,6 +147,9 @@ function Ventanas(nombre){
     switch(nombre){
         case 'index':
             window.location.href = "../index.html";
+            break;
+        case 'Medicamentos':
+            window.location.href = "../Catalogo_med.html";
             break;
     }
 }
