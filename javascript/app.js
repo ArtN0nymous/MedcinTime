@@ -62,7 +62,7 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
-function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis,num ){
+function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma){
     var  card= document.getElementById("tabla_body").innerHTML += 
 				 `<div class='col-md-4 mt-3'>
                  <div class='tarjeta'>
@@ -78,7 +78,7 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 						<img class="foto" src="${medImageURL}" alt="">
 						<h2>Te queda(n) 1 dosis</h2>
 						<div class="tareas">
-							<a class="link" href="">${numeroDosis} dosis el ${diaToma}</a>
+							<a class="link" href="">${diaToma}</a>
 						</div>
 					</div>
 				</div>

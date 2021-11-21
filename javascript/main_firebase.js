@@ -244,7 +244,7 @@ function Guardar(oper){
             let dosis_unidad = $("#dosis_u").val();
             //let dosis_R = $("#Dosis_R").val();
             //let dosis_Ru = $("#Dosis_Ru").val();
-            if($("#Fecha_esp").is(':checked')) {
+            if($("#Fecha_esp").is(':checked') && $("#fecha_input").val() != "") {
                 fecha_regist =  $("#fecha_input").val();
             } else {
                 fecha_regist = new Date();
@@ -341,14 +341,14 @@ function Guardar(oper){
 function subir_img(){
     var file = selectIMG();
     var url = "";
-    storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
+    storageRef.child('Imagenes/').put(file).then(function(snapshot){
         //alert("Exitoso!");
         snapshot.ref.getDownloadURL().then(function(imgurl){
             url = imgurl;
             document.getElementById('url_imagen').value=url;
         });
     }).catch((error)=>{
-        alert("error: " + error);
+        alert("error: " + error.message);
     });
 }
 //Leer Datos
@@ -358,16 +358,14 @@ function leerdatos(oper){
         case 'Med':
             var usuario = document.getElementById('usuario_medicamentos').value;
             var card = document.getElementById('tabla_body');
-            var num = 0;
             db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
                 card.innerHTML = '';
                 querySnapshot.forEach((doc)=>{
-                    num  +=1;
                     newCard(doc.id,'images/card-background/img1.jpg',
                     doc.data().medicamento,
                     doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
                     doc.data().url,
-                    doc.data().fecha_regist,'8',num);
+                    doc.data().fecha_regist);
                 });
             });
             break;
