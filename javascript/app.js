@@ -86,24 +86,15 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 				<div class="pie">	
                     <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
 					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
-					<span class="icon3" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-2x"></i></span>
+					<span class="icon3" onclick="Editar('${id}')"><i class="fa fa-pencil fa-2x"></i></span>
                     
 				</div>
                 </div>
 			</div> `
 }
-function Editar(oper,id){
-    switch(oper){
-        case'MD':
-            MostrarModal('EditarMed');
-            Consultas('MD',id);
-            break;
-        case 'RE':
-            MostrarModal('EditarRec');
-            Consultas('RE',id);
-            break;
-    }
-    
+function Editar(id){
+    MostrarModal('EditarMed');
+    Consultas(id);
 }
 
 function Mostrar(){
