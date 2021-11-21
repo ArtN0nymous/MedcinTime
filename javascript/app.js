@@ -153,3 +153,8 @@ function Ventanas(nombre){
             break;
     }
 }
+function Cancelar(){
+    let url = $("#url_imagen").val();
+    BorrarIMG(url);
+    Ventanas('Medicamentos');
+}

@@ -357,17 +357,19 @@ function leerdatos(oper){
     switch(oper){
         case 'Med':
             var usuario = document.getElementById('usuario_medicamentos').value;
-            var card = document.getElementById('tabla_body');
-            db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
-                card.innerHTML = '';
-                querySnapshot.forEach((doc)=>{
-                    newCard(doc.id,'images/card-background/img1.jpg',
-                    doc.data().medicamento,
-                    doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
-                    doc.data().url,
-                    doc.data().fecha_regist);
+            if(document.getElementById('tabla_body')){
+                var card = document.getElementById('tabla_body');
+                db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
+                    card.innerHTML = '';
+                    querySnapshot.forEach((doc)=>{
+                        newCard(doc.id,'images/card-background/img1.jpg',
+                        doc.data().medicamento,
+                        doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
+                        doc.data().url,
+                        doc.data().fecha_regist);
+                    });
                 });
-            });
+            }
             break;
     }
 }
@@ -505,14 +507,8 @@ function BorrarIMG(url){
             alert('Error: '+error.message);     
         });
     }else{
-        Alertas('Error, no hay una url de imagen cargada');
         return;
     }
-}
-function Cancelar(){
-    let url = $("#url_imagen").val();
-    BorrarIMG(url);
-    Ventanas('Medcicamentos');
 }
   /*
 //Eliminar documento
