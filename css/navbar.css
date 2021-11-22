@@ -7,6 +7,9 @@ body {
 	background:#FFFFFA;
 
 }
+a{
+	text-decoration: none;
+}
 
 header {
 	width:100%;
@@ -59,6 +62,7 @@ header nav ul li span {
 
 header nav ul li a:hover {
 	background:#037E8C;
+	text-decoration: none;
 }
 
 section {
