@@ -241,7 +241,7 @@ function Guardar(){
     let contenido_unidad = $("#contenido_u").val();
     let dosis_unidad = $("#dosis_u").val();
     let cadaHoras = $("#cadaHoras").val();
-    if(cadaHoras == ""){
+    if(cadaHoras == "" || cadaHoras == null){
         Alertas('1','Tomar cada','','');
         return;
     }
