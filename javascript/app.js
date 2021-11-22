@@ -79,10 +79,43 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 						<h2>Te queda(n) 1 dosis</h2>
 						<div class="tareas">
 							<a class="link" href="">${diaToma}</a>
+                            
+                        <div class="row">
+                            <br>
+                            <br>
+                        <div class="col">
+                          <label for="lunes" class="lblDias">Lun</label>
+                          <input type="checkbox" name="lunes" id="cbLunes" class="cbDias" disabled>
+                        </div>
+                          <div class="col">
+                            <label for="martes" class="lblDias">Mar</label>
+                            <input type="checkbox" name="martes" id="cbMartes" class="cbDias" disabled>
+                          </div>
+                          <div class="col">
+                            <label for="miercoles" class="lblDias">Mie</label>
+                          <input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias" disabled>
+                          </div>
+                          <div class="col">
+                            <label for="jueves" class="lblDias">Juev</label>
+                            <input type="checkbox" name="jueves" id="cbJueves" class="cbDias" disabled>
+                          </div>
+                          <div class="col">
+                            <label for="viernes" class="lblDias">Vier</label>
+                            <input type="checkbox" name="viernes" id="cbViernes" class="cbDias" disabled>
+                          </div>
+                          <div class="col">
+                            <label for="sabado" class="lblDias">Sab</label>
+                            <input type="checkbox" name="sabado" id="cbSabado" class="cbDias" disabled>
+                          </div>
+                          <div class="col">
+                            <label for="domingo" class="lblDias">Dom</label>
+                            <input type="checkbox" name="domingo" id="cbDomingo" class="cbDias" disabled>
+                          </div>                                                                                                                                                
+                      </div>             
 						</div>
 					</div>
 				</div>
-	
+
 				<div class="pie">	
                     <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
 					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
