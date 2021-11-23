@@ -7,6 +7,9 @@ $(document).ready(function(){
     if(document.getElementById('label_forget')){
         document.getElementById('label_forget').style.display = "none"
     }
+    if(document.getElementById('load_dialog')){
+        document.getElementById('load_dialog').style.display = "none";
+    }
   });
 function MostrarModal(nombre){
     $('#modal'+nombre).modal({backdrop: 'static', keyboard: false});
@@ -266,7 +269,7 @@ function MostrarDialog(nombre){
 function CerrarDialog(nombre){
     switch(nombre){
         case 'load_dialog':
-            $("#load_dialog").dialog('hide');
+            $("#load_dialog").dialog('close');
             break;
     }
 }

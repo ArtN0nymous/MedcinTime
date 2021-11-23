@@ -307,14 +307,17 @@ function Guardar(){
 }
 //subir imagen
 function subir_img(){
+    MostrarDialog('load_dialog');
     var file = selectIMG();
     var url = "";
     storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
         snapshot.ref.getDownloadURL().then(function(imgurl){
             url = imgurl;
             document.getElementById('url_imagen').value=url;
+            CerrarDialog('load_dialog');
         });
     }).catch((error)=>{
+        CerrarDialog('load_dialog');
         alert("error: " + error.message);
     });
 }
