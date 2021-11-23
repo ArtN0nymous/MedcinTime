@@ -330,7 +330,7 @@ function leerdatos(oper){
                 doc.data().medicamento,
                 doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
                 doc.data().url,
-                doc.data().fecha_regist);
+                doc.data().fecha_regist,doc.data().diasRecordar);
             });
         });
     }

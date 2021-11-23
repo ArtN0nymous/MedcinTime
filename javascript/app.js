@@ -62,7 +62,40 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
-function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma){
+function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma,diasRecordar){
+    let array = diasRecordar.split(',');
+    var lunes = '<input type="checkbox" name="lunes" id="cbLunes" class="cbDias" disabled>';
+    var martes = '<input type="checkbox" name="martes" id="cbMartes" class="cbDias" disabled>';
+    var miercoles = '<input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias" disabled>';
+    var jueves = '<input type="checkbox" name="jueves" id="cbJueves" class="cbDias" disabled>';
+    var viernes = '<input type="checkbox" name="viernes" id="cbViernes" class="cbDias" disabled>';
+    var sabado = '<input type="checkbox" name="sabado" id="cbSabado" class="cbDias" disabled>';
+    var domingo = '<input type="checkbox" name="domingo" id="cbDomingo" class="cbDias" disabled>';
+    array.forEach(element => {
+        switch(element){
+            case 'Lunes':
+                lunes='<input type="checkbox" name="lunes" id="cbLunes" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Martes':
+                martes = '<input type="checkbox" name="martes" id="cbMartes" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Miercoles':
+                miercoles = '<input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Jueves':
+                jueves = '<input type="checkbox" name="jueves" id="cbJueves" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Viernes':
+                viernes = '<input type="checkbox" name="viernes" id="cbViernes" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Sabado':
+                sabado = '<input type="checkbox" name="sabado" id="cnSabado" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Domingo':
+                domingo = '<input type="checkbox" name="domingo" id="cbDomingo" class="cbDias" checked="checked" disabled>'
+                break;
+        }
+    });
     var  card= document.getElementById("tabla_body").innerHTML += 
 				 `<div class='col-md-4 mt-3'>
                  <div class='tarjeta'>
@@ -85,31 +118,31 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
                             <br>
                         <div class="col">
                           <label for="lunes" class="lblDias">Lun</label>
-                          <input type="checkbox" name="lunes" id="cbLunes" class="cbDias" disabled>
+                          ${lunes}
                         </div>
                           <div class="col">
                             <label for="martes" class="lblDias">Mar</label>
-                            <input type="checkbox" name="martes" id="cbMartes" class="cbDias" disabled>
+                            ${martes}
                           </div>
                           <div class="col">
                             <label for="miercoles" class="lblDias">Mie</label>
-                          <input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias" disabled>
+                          ${miercoles}
                           </div>
                           <div class="col">
                             <label for="jueves" class="lblDias">Juev</label>
-                            <input type="checkbox" name="jueves" id="cbJueves" class="cbDias" disabled>
+                            ${jueves}
                           </div>
                           <div class="col">
                             <label for="viernes" class="lblDias">Vier</label>
-                            <input type="checkbox" name="viernes" id="cbViernes" class="cbDias" disabled>
+                            ${viernes}
                           </div>
                           <div class="col">
                             <label for="sabado" class="lblDias">Sab</label>
-                            <input type="checkbox" name="sabado" id="cbSabado" class="cbDias" disabled>
+                            ${sabado}
                           </div>
                           <div class="col">
                             <label for="domingo" class="lblDias">Dom</label>
-                            <input type="checkbox" name="domingo" id="cbDomingo" class="cbDias" disabled>
+                            ${domingo}
                           </div>                                                                                                                                                
                       </div>             
 						</div>
