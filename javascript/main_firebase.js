@@ -242,7 +242,7 @@ function Guardar(){
     let dosis_unidad = $("#dosis_u").val();
     let cadaHoras = $("#cadaHoras").val();
     if(cadaHoras == "" || cadaHoras == null){
-        Alertas('1','Tomar cada','','');
+        Alertas('1','Fijar recordatorio','','');
         return;
     }
     let listDias = Dias();
