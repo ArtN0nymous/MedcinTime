@@ -381,16 +381,21 @@ function Actualizar(){
     }
 }
 function Borrar(id,url){
-    let user = $("#usuario_medicamentos").val();
-    if(id != "" && id != null && user != "" && user != null){
-        db.collection("userM_"+user).doc(id).delete().then(function(){
-            //success
-        }).catch(function(error){
-            Alertas('4','','Medicamento',error.message);
-        });
-        BorrarIMG(url);
+    var confirm = window.confirm('¿Desea eliminar este medicamento?');
+    if(confirm != false){
+        let user = $("#usuario_medicamentos").val();
+        if(id != "" && id != null && user != "" && user != null){
+            db.collection("userM_"+user).doc(id).delete().then(function(){
+                //success
+            }).catch(function(error){
+                Alertas('4','','Medicamento',error.message);
+            });
+            BorrarIMG(url);
+        }else{
+            Alertas('2','id o usuario','','');
+        }
     }else{
-        Alertas('2','id o usuario','','');
+
     }
 }
 function BorrarIMG(url){
