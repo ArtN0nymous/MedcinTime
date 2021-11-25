@@ -242,7 +242,7 @@ function Guardar(){
     let dosis_unidad = $("#dosis_u").val();
     let cadaHoras = $("#cadaHoras").val();
     if(cadaHoras == "" || cadaHoras == null){
-        Alertas('1','Tomar cada','','');
+        Alertas('1','Fijar recordatorio','','');
         return;
     }
     let listDias = Dias();
@@ -307,14 +307,17 @@ function Guardar(){
 }
 //subir imagen
 function subir_img(){
+    MostrarDialog('load_dialog');
     var file = selectIMG();
     var url = "";
     storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
         snapshot.ref.getDownloadURL().then(function(imgurl){
             url = imgurl;
             document.getElementById('url_imagen').value=url;
+            CerrarDialog('load_dialog');
         });
     }).catch((error)=>{
+        CerrarDialog('load_dialog');
         alert("error: " + error.message);
     });
 }
@@ -330,7 +333,7 @@ function leerdatos(oper){
                 doc.data().medicamento,
                 doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
                 doc.data().url,
-                doc.data().fecha_regist);
+                doc.data().fecha_regist,doc.data().diasRecordar);
             });
         });
     }
@@ -381,16 +384,21 @@ function Actualizar(){
     }
 }
 function Borrar(id,url){
-    let user = $("#usuario_medicamentos").val();
-    if(id != "" && id != null && user != "" && user != null){
-        db.collection("userM_"+user).doc(id).delete().then(function(){
-            //success
-        }).catch(function(error){
-            Alertas('4','','Medicamento',error.message);
-        });
-        BorrarIMG(url);
+    var confirm = window.confirm('¿Desea eliminar este medicamento?');
+    if(confirm != false){
+        let user = $("#usuario_medicamentos").val();
+        if(id != "" && id != null && user != "" && user != null){
+            db.collection("userM_"+user).doc(id).delete().then(function(){
+                //success
+            }).catch(function(error){
+                Alertas('4','','Medicamento',error.message);
+            });
+            BorrarIMG(url);
+        }else{
+            Alertas('2','id o usuario','','');
+        }
     }else{
-        Alertas('2','id o usuario','','');
+
     }
 }
 function BorrarIMG(url){
