@@ -32,6 +32,7 @@ firebase.initializeApp({
   }
   var provider = new firebase.auth.GoogleAuthProvider();
   var storageRef = firebase.storage().ref();
+  var functions = firebase.functions();
   //var analitycs = firebase.analitycs();
   //variables publicas
   var user_uid = "";
@@ -412,4 +413,21 @@ function BorrarIMG(url){
     }else{
         return;
     }
+}
+function Cloudfunctions(){
+    var mailer = firebase.functions().httpsCallable('mailer');
+    mailer({ to: 'jr616934@gmail.com', message: "Probando",subject:"Probando funciones" })
+      .then((result) => {
+        // Read result of the Cloud Function.
+        //var sanitizedMessage = result.data.text;
+        alert('funcion llamada');
+      })
+      .catch((error) => {
+        // Getting the Error details.
+        var code = error.code;
+        var message = error.message;
+        var details = error.details;
+        console.log('Error: ' + code+ ' ' + message+' '+details);
+        // ...
+      });
 }
