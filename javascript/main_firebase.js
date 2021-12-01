@@ -323,7 +323,7 @@ function subir_img(){
     });
 }
 //Leer Datos
-function leerdatos(oper){
+function leerdatos(){
     var usuario = document.getElementById('usuario_medicamentos').value;
     if(document.getElementById('tabla_body')){
         var card = document.getElementById('tabla_body');
