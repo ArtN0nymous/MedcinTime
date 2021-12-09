@@ -99,7 +99,15 @@ button{
 .imagen{
     width: 100%;
 }
+<<<<<<< HEAD
 
+=======
+#img{
+    width: 1.2em;
+    height: .8em;
+   
+}
+>>>>>>> Alexis
 .fijarRecordatorioButton
 {
     border: 1px solid black;
