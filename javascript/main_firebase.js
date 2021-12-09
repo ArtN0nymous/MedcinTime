@@ -321,6 +321,7 @@ function subir_img(){
         CerrarDialog('load_dialog');
         alert("error: " + error.message);
     });
+    CerrarDialog('load_dialog');
 }
 //Leer Datos
 function leerdatos(){
