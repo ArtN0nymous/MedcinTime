@@ -32,6 +32,7 @@ firebase.initializeApp({
   }
   var provider = new firebase.auth.GoogleAuthProvider();
   var storageRef = firebase.storage().ref();
+  //var functions = firebase.functions();
   //var analitycs = firebase.analitycs();
   //variables publicas
   var user_uid = "";
@@ -47,7 +48,7 @@ firebase.initializeApp({
           storageRef = firebase.storage().ref("Medicamentos_"+user_uid);
           if(document.getElementById('usuario_medicamentos')){
             document.getElementById('usuario_medicamentos').value=user_uid;
-            leerdatos('Med');
+            leerdatos();
           }
           //alert("usuario: " + user.uid);
         } else {
@@ -230,293 +231,187 @@ function Guardar_Perfil(){
     });
 }
 //Medicamentos
-function Guardar(oper){
+function Guardar(){
     verificar_loggedIn();
-    switch(oper){
-        case 'ME':
-            var url = $("#url_imagen").val();
-            var fecha_regist = "";
-            let medicamento = $("#medicamento").val();
-            let dosis = $("#dosis").val();
-            let contenido = $("#contenido").val();
-            let contenido_unidad = $("#contenido_u").val();
-            let dosis_unidad = $("#dosis_u").val();
-            //let dosis_R = $("#Dosis_R").val();
-            //let dosis_Ru = $("#Dosis_Ru").val();
-            if($("#Fecha_esp").is(':checked')) {
-                fecha_regist =  $("#fecha_input").val();
-            } else {
-                fecha_regist = new Date();
-                fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
-            }
-            if(url != ""){
-                if(medicamento != ""){
-                    if(dosis != ""){
-                        if(contenido != ""){
-                            if(dosis_unidad != ""){
-                                if(contenido_unidad != ""){
-                                    db.collection("userM_"+user_uid).add({
-                                        medicamento: medicamento,
-                                        dosis: dosis,
-                                        contenido:  contenido,
-                                        contenido_unidad:  contenido_unidad,
-                                        dosis_unidad: dosis_unidad,
-                                        fecha_regist: fecha_regist,
-                                        url: url
-                                    })
-                                    .then((docRef) => {
-                                        Alertas('3','','Medicamento','');
-                                        window.location.href = "../Catalogo_med.html";
-                                    })
-                                    .catch((error) => {
-                                        Alertas('4','','Medicamento',error.message);
-                                    });
-                                }else{
-                                    Alertas('1','Contenido por unidad','','');
-                                    break;
-                                }
-                            }else{
-                                Alertas('2','Dosis_unidad','','');
-                                break;
+    var user = $("#usuario_medicamentos").val();
+    var url = $("#url_imagen").val();
+    var fecha_regist = "";
+    let medicamento = $("#medicamento").val();
+    let dosis = $("#dosis").val();
+    let contenido = $("#contenido").val();
+    let contenido_unidad = $("#contenido_u").val();
+    let dosis_unidad = $("#dosis_u").val();
+    let cadaHoras = $("#cadaHoras").val();
+    if(cadaHoras == "" || cadaHoras == null){
+        Alertas('1','Fijar recordatorio','','');
+        return;
+    }
+    let listDias = Dias();
+    //let dosis_R = $("#Dosis_R").val();
+    //let dosis_Ru = $("#Dosis_Ru").val();
+    if($("#Fecha_esp").is(':checked') && $("#fecha_input").val() != "") {
+        fecha_regist =  $("#fecha_input").val();
+    } else {
+        fecha_regist = new Date().toLocaleDateString();
+        //fecha_regist = fecha_regist.getDate() + "-" + (fecha_regist.getMonth() +1) + "-" + fecha_regist.getFullYear();
+    }
+    if(url != ""){
+        if(medicamento != ""){
+            if(dosis != ""){
+                if(contenido != ""){
+                    if(dosis_unidad != ""){
+                        if(contenido_unidad != ""){
+                            if(user != "" && user != null){
+                                db.collection("userM_"+user).add({
+                                    medicamento: medicamento,
+                                    dosis: dosis,
+                                    contenido:  contenido,
+                                    contenido_unidad:  contenido_unidad,
+                                    dosis_unidad: dosis_unidad,
+                                    fecha_regist: fecha_regist,
+                                    tomarCda: cadaHoras,
+                                    diasRecordar: listDias,
+                                    url: url
+                                })
+                                .then((docRef) => {
+                                    //Alertas('3','','Medicamento','');
+                                    window.location.href = "../Catalogo_med.html";
+                                })
+                                .catch((error) => {
+                                    Alertas('4','','Medicamento',error.message);
+                                });
                             }
                         }else{
-                            Alertas('1','Contenido Neto','','');
-                            break;
+                            Alertas('1','Contenido por unidad','','');
+                            return;
                         }
                     }else{
-                        Alertas('2','Dosis','','');
-                        break;
+                        Alertas('2','Dosis_unidad','','');
+                        return;
                     }
                 }else{
-                    Alertas('1','Medicamento','','');
-                    break;
+                    Alertas('1','Contenido Neto','','');
+                    return;
                 }
             }else{
-                Alertas('5','url_imagen','Medicamento','Ocurrió un error, debe selecionar una imagen valida');
-                break;
-            }
-            break;
-        case 'RE':
-            var url = "Aqui va la URL";
-            var cantidad_xcaja = parseInt($("#contenido").val(), 10);
-            var cantidad_cajas = parseInt($("#cantidad_cajas").val(), 10);
-            var contenido_total = cantidad_xcaja * cantidad_cajas;
-            if(url != ""){
-                var fecha_inicio = $("#fecha_inicio");
-                if(fecha_inicio != "") {
-                    fecha_inicio =  $("#fecha_inicio").val();
-                } else {
-                    fecha_inicio = new Date();
-                    fecha_inicio = fecha_inicio.getDate() + "-" + (fecha_inicio.getMonth() +1) + "-" + fecha_inicio.getFullYear();
-                }
-                db.collection("userRe_"+user_uid).add({
-                    medicamento: $("#medicamento").val(),
-                    cantidadTomar:$("#cantidadTomar").val(),
-                    dosisTomar:$("#dosis_tomar").val(),
-                    contenido_unidad: $("#contenido_u").val(),
-                    cantidad_cajas: cantidad_cajas,
-                    cantidadXcaja:cantidad_xcaja,
-                    Total_tomar:contenido_total,
-                    tcadaCant:$("#cantidad_cada").val(),
-                    tcadaMedida:$("#tomar_cada_medida").val(),
-                    fecha_inicio: fecha_inicio,
-                    url: url
-                })
-                .then((docRef) => {
-                    alert("Recordatorio Guardado correctamente");
-                })
-                .catch((error) => {
-                    alert("Error adding document: ", error);
-                });
-            }else{
+                Alertas('2','Dosis','','');
                 return;
             }
-            break;
+        }else{
+            Alertas('1','Medicamento','','');
+            return;
+        }
+    }else{
+        Alertas('1','Imagen','','');
+        return;
     }
 }
 //subir imagen
 function subir_img(){
+    MostrarDialog('load_dialog');
     var file = selectIMG();
     var url = "";
     storageRef.child('Imagenes/'+file.name).put(file).then(function(snapshot){
-        //alert("Exitoso!");
         snapshot.ref.getDownloadURL().then(function(imgurl){
             url = imgurl;
             document.getElementById('url_imagen').value=url;
+            CerrarDialog('load_dialog');
         });
     }).catch((error)=>{
-        alert("error: " + error);
+        CerrarDialog('load_dialog');
+        alert("error: " + error.message);
     });
+    CerrarDialog('load_dialog');
 }
 //Leer Datos
-function leerdatos(oper){
-    //verificar_loggedIn();
-    switch(oper){
-        case 'Med':
-            var usuario = document.getElementById('usuario_medicamentos').value;
-            var card = document.getElementById('tabla_body');
-            var num = 0;
-            db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
-                card.innerHTML = '';
-                querySnapshot.forEach((doc)=>{
-                    num  +=1;
-                    newCard(doc.id,'images/card-background/img1.jpg',
-                    doc.data().medicamento,
-                    doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
-                    doc.data().url,
-                    doc.data().fecha_regist,'8',num);
-                });
+function leerdatos(){
+    var usuario = document.getElementById('usuario_medicamentos').value;
+    if(document.getElementById('tabla_body')){
+        var card = document.getElementById('tabla_body');
+        db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
+            card.innerHTML = '';
+            querySnapshot.forEach((doc)=>{
+                newCard(doc.id,'images/card-background/img1.jpg',
+                doc.data().medicamento,
+                doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
+                doc.data().url,
+                doc.data().fecha_regist,doc.data().diasRecordar);
             });
-            break;
+        });
     }
 }
 //consultar informacion de un elemento
-function Consultas(oper,id){
+function Consultas(id){
     verificar_loggedIn();
-    switch(oper){
-        case 'MD':
-            try{
-                db.collection("userM_"+user_uid).onSnapshot((querySnapshot)=>{
-                    querySnapshot.forEach((doc)=>{
-                        if(doc.id == id){
-                            //var date = new Date(doc.data().fecha_regist);
-                            //const localDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay();
-                            document.getElementById('med_id').value = doc.id;
-                            document.getElementById('med_nombre').value = doc.data().medicamento;
-                            document.getElementById('med_contenido').value = doc.data().contenido;
-                            document.getElementById('med_unidad').value = doc.data().contenido_unidad;
-                            document.getElementById('med_dosis').value = doc.data().dosis;
-                            document.getElementById('fecha_registro').value = doc.data().fecha_regist;
-                            $("#img").attr('src',doc.data().url);
-                            document.getElementById('url_imagen').value = doc.data().url;
-                        }
-                    });
-                });
-            }catch(e){
-                alert(e.message);
-            }
-            break;
-        case 'RE':
-            try{
-                db.collection("userRe_"+user_uid).onSnapshot((querySnapshot)=>{
-                    querySnapshot.forEach((doc)=>{
-                        if(doc.id == id){
-                            document.getElementById('med_id').value = doc.id;
-                            document.getElementById('med_nombre').value = doc.data().medicamento;
-                            document.getElementById('med_contenido').value = doc.data().contenido;
-                            document.getElementById('med_unidad').value = doc.data().contenido_unidad;
-                            document.getElementById('med_cantidad_tomar').value = doc.data().cantidadTomar;
-                            document.getElementById('med_dosis').value = doc.data().dosisTomar;
-                            document.getElementById('med_cant_cajas').value = doc.data().cantidad_cajas;
-                            document.getElementById('med_acntXcaja').value = doc.data().cantidadXcaja;
-                            document.getElementById('med_tomar_cada').value = doc.data().tcadaCant;
-                            document.getElementById('med_tomar_medida').value = doc.data().tcadaMedida;
-                            document.getElementById('fecha_inicio').value = doc.data().fecha_inicio;
-                            $("#img").attr('src',doc.data().url);
-                            document.getElementById('url_imagen').value = doc.data().url;
-                        }
-                    });
-                });
-            }catch(e){
-                alert(e.message);
-            }
-            break;
+    try{
+        db.collection("userM_"+user_uid).onSnapshot((querySnapshot)=>{
+            querySnapshot.forEach((doc)=>{
+                if(doc.id == id){
+                    //var date = new Date(doc.data().fecha_regist);
+                    //const localDate = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay();
+                    document.getElementById('med_id').value = doc.id;
+                    document.getElementById('med_nombre').value = doc.data().medicamento;
+                    document.getElementById('med_contenido').value = doc.data().contenido;
+                    document.getElementById('med_unidad').value = doc.data().contenido_unidad;
+                    document.getElementById('med_dosis').value = doc.data().dosis;
+                    document.getElementById('fecha_registro').value = doc.data().fecha_regist;
+                    $("#img").attr('src',doc.data().url);
+                    document.getElementById('url_imagen').value = doc.data().url;
+                }
+            });
+        });
+    }catch(e){
+        alert(e.message);
     }
 }
-function Actualizar(oper){
+function Actualizar(){
     var id= $("#med_id").val();
     var url = $("#url_imagen").val();
-    switch (oper){
-        case 'MD':
-            if(url != "" && id != ""){
-                db.collection("userM_"+user_uid).doc(id).set({
-                    medicamento: $("#med_nombre").val(),
-                    dosis: $("#med_dosis").val(),
-                    contenido: $("#med_contenido").val(),
-                    contenido_unidad: $("#med_unidad").val(),
-                    fecha_regist: $("#fecha_registro").val(),
-                    url: url
-                })
-                .then((docRef) => {
-                    OcultarModal('EditarMed');
-                    alert("Medicamento Actualizado correctamente");
-                })
-                .catch((error) => {
-                    alert("Error adding document: ", error.message);
-                });
-            } 
-            break;
-        case 'RE':
-            if(url != "" && id != ""){
-                var cantidad_xcaja = parseInt($("#contenido").val(), 10);
-                var cantidad_cajas = parseInt($("#cantidad_cajas").val(), 10);
-                var contenido_total = cantidad_xcaja * cantidad_cajas;
-                var fecha_inicio = $("#fecha_inicio");
-                if(fecha_inicio != "") {
-                    fecha_inicio =  $("#fecha_inicio").val();
-                } else {
-                    fecha_inicio = new Date();
-                    fecha_inicio = fecha_inicio.getDate() + "-" + (fecha_inicio.getMonth() +1) + "-" + fecha_inicio.getFullYear();
-                }
-                db.collection("userRe_"+user_uid).doc(id).set({
-                    medicamento: $("#medicamento").val(),
-                    cantidadTomar:$("#cantidadTomar").val(),
-                    dosisTomar:$("#dosis_tomar").val(),
-                    contenido_unidad: $("#contenido_u").val(),
-                    cantidad_cajas: cantidad_cajas,
-                    cantidadXcaja:cantidad_xcaja,
-                    Total_tomar:contenido_total,
-                    tcadaCant:$("#cantidad_cada").val(),
-                    tcadaMedida:$("#tomar_cada_medida").val(),
-                    fecha_inicio: fecha_inicio,
-                    url: url
-                })
-                .then((docRef) => {
-                    OcultarModal('EditarRec');
-                    alert("Recordatorio Actualizado correctamente");
-                })
-                .catch((error) => {
-                    alert("Error adding document: ", error.message);
-                });
-            } 
-            break;
+    if(url != "" && id != ""){
+        db.collection("userM_"+user_uid).doc(id).set({
+            medicamento: $("#med_nombre").val(),
+            dosis: $("#med_dosis").val(),
+            contenido: $("#med_contenido").val(),
+            contenido_unidad: $("#med_unidad").val(),
+            fecha_regist: $("#fecha_registro").val(),
+            url: url
+        })
+        .then((docRef) => {
+            OcultarModal('EditarMed');
+            alert("Medicamento Actualizado correctamente");
+        })
+        .catch((error) => {
+            alert("Error adding document: ", error.message);
+        });
     }
 }
-  /*
-//Eliminar documento
-function Borrar(id){
-    db.collection("users").doc(id).delete().then(function(){
-        alert("El registro a sido eliminado");
-    }).catch(function(error){
-        alert("El registro NO a sido eliminado: ",error);
-    });
+function Borrar(id,url){
+    var confirm = window.confirm('¿Desea eliminar este medicamento?');
+    if(confirm != false){
+        let user = $("#usuario_medicamentos").val();
+        if(id != "" && id != null && user != "" && user != null){
+            db.collection("userM_"+user).doc(id).delete().then(function(){
+                //success
+            }).catch(function(error){
+                Alertas('4','','Medicamento',error.message);
+            });
+            BorrarIMG(url);
+        }else{
+            Alertas('2','id o usuario','','');
+        }
+    }else{
+
+    }
 }
- 
-//Actualizar documento
-function Editar(id,nom,ape,edad,tel){
-    $('#modalEditar').modal('show');
-    document.getElementById('nombre1').value=nom;
-    document.getElementById('apellido1').value=ape;
-    document.getElementById('edad1').value=edad;
-    document.getElementById('tmovil1').value=tel;
-    document.getElementById('ID').value=id;
+function BorrarIMG(url){
+    if(url != "" && url != null){
+        var imgRef = firebase.storage().refFromURL(url);
+        imgRef.delete().then(function() {
+            //success
+        }).catch(function(error) {
+            alert('Error: '+error.message);     
+        });
+    }else{
+        return;
+    }
 }
-function Update(){
-    var id= document.getElementById('ID').value;
-    var update = db.collection("users").doc(id);
-    return update.update({
-        nombre: document.getElementById('nombre1').value,
-        apellido: document.getElementById('apellido1').value,
-        edad: document.getElementById('edad1').value,
-        tmovil: document.getElementById('tmovil1').value
-    }).then((docRef) => {
-        $('#modalEditar').modal('hide');
-        //console.log("Document written with ID: ", docRef.id);
-        //window.location.href = 'index.html';   
-    })
-    .catch((error) => {
-        $('#modalEditar').modal('hide');
-        alert("Error: "+ error);
-    });
-}
-*/

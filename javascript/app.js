@@ -7,6 +7,9 @@ $(document).ready(function(){
     if(document.getElementById('label_forget')){
         document.getElementById('label_forget').style.display = "none"
     }
+    if(document.getElementById('load_dialog')){
+        document.getElementById('load_dialog').style.display = "none";
+    }
   });
 function MostrarModal(nombre){
     $('#modal'+nombre).modal({backdrop: 'static', keyboard: false});
@@ -62,7 +65,40 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
-function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma, numeroDosis,num ){
+function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma,diasRecordar){
+    let array = diasRecordar.split(',');
+    var lunes = '<input type="checkbox" name="lunes" id="cbLunes" class="cbDias" disabled>';
+    var martes = '<input type="checkbox" name="martes" id="cbMartes" class="cbDias" disabled>';
+    var miercoles = '<input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias" disabled>';
+    var jueves = '<input type="checkbox" name="jueves" id="cbJueves" class="cbDias" disabled>';
+    var viernes = '<input type="checkbox" name="viernes" id="cbViernes" class="cbDias" disabled>';
+    var sabado = '<input type="checkbox" name="sabado" id="cbSabado" class="cbDias" disabled>';
+    var domingo = '<input type="checkbox" name="domingo" id="cbDomingo" class="cbDias" disabled>';
+    array.forEach(element => {
+        switch(element){
+            case 'Lunes':
+                lunes='<input type="checkbox" name="lunes" id="cbLunes" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Martes':
+                martes = '<input type="checkbox" name="martes" id="cbMartes" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Miercoles':
+                miercoles = '<input type="checkbox" name="miercoles" id="cbMiercoles" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Jueves':
+                jueves = '<input type="checkbox" name="jueves" id="cbJueves" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Viernes':
+                viernes = '<input type="checkbox" name="viernes" id="cbViernes" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Sabado':
+                sabado = '<input type="checkbox" name="sabado" id="cnSabado" class="cbDias" checked="checked" disabled>'
+                break;
+            case 'Domingo':
+                domingo = '<input type="checkbox" name="domingo" id="cbDomingo" class="cbDias" checked="checked" disabled>'
+                break;
+        }
+    });
     var  card= document.getElementById("tabla_body").innerHTML += 
 				 `<div class='col-md-4 mt-3'>
                  <div class='tarjeta'>
@@ -78,30 +114,56 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 						<img class="foto" src="${medImageURL}" alt="">
 						<h2>Te queda(n) 1 dosis</h2>
 						<div class="tareas">
-							<a class="link" href="">${numeroDosis} dosis el ${diaToma}</a>
+							<a class="link" href="">${diaToma}</a>
+                            
+                        <div class="row">
+                            <br>
+                            <br>
+                        <div class="col">
+                          <label for="lunes" class="lblDias">Lun</label>
+                          ${lunes}
+                        </div>
+                          <div class="col">
+                            <label for="martes" class="lblDias">Mar</label>
+                            ${martes}
+                          </div>
+                          <div class="col">
+                            <label for="miercoles" class="lblDias">Mie</label>
+                          ${miercoles}
+                          </div>
+                          <div class="col">
+                            <label for="jueves" class="lblDias">Juev</label>
+                            ${jueves}
+                          </div>
+                          <div class="col">
+                            <label for="viernes" class="lblDias">Vier</label>
+                            ${viernes}
+                          </div>
+                          <div class="col">
+                            <label for="sabado" class="lblDias">Sab</label>
+                            ${sabado}
+                          </div>
+                          <div class="col">
+                            <label for="domingo" class="lblDias">Dom</label>
+                            ${domingo}
+                          </div>                                                                                                                                                
+                      </div>             
 						</div>
 					</div>
 				</div>
-	
+
 				<div class="pie">	
-					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>
-					<span class="icon1" onclick="Editar('MD','${id}')"><i class="fa fa-pencil fa-2x"></i></span>
+                    <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
+					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
+					<span class="icon3" onclick="Editar('${id}')"><i class="fa fa-pencil fa-2x"></i></span>
+                    
 				</div>
                 </div>
 			</div> `
 }
-function Editar(oper,id){
-    switch(oper){
-        case'MD':
-            MostrarModal('EditarMed');
-            Consultas('MD',id);
-            break;
-        case 'RE':
-            MostrarModal('EditarRec');
-            Consultas('RE',id);
-            break;
-    }
-    
+function Editar(id){
+    MostrarModal('EditarMed');
+    Consultas(id);
 }
 
 function Mostrar(){
@@ -136,12 +198,78 @@ function Alertas(Tipo,nombre_campo,objeto,message){
         case '5':
             alert(message + " ###OBJETO: " + objeto + " ###CAMPO: " + nombre_campo);
             break;
+        case '6':
+            alert(objeto + " eliminado correctamente !");
+            break;
     }
 }
 function Ventanas(nombre){
     switch(nombre){
         case 'index':
             window.location.href = "../index.html";
+            break;
+        case 'Medicamentos':
+            window.location.href = "../Catalogo_med.html";
+            break;
+    }
+}
+function Cancelar(){
+    let url = $("#url_imagen").val();
+    BorrarIMG(url);
+    Ventanas('Medicamentos');
+}
+function Dias(){
+    let Dias = "";
+    for(var i= 0; i<8;i++){
+        if($("#cbDia_"+i+"_").is(':checked')){
+            switch(i.toString()){
+                case '1':
+                    Dias += 'Lunes,';
+                    break;
+                case '2':
+                    Dias += 'Martes,';
+                    break;
+                case '3':
+                    Dias += 'Miercoles,';
+                    break;
+                case '4':
+                    Dias += 'Jueves,';
+                    break;
+                case '5':
+                    Dias += 'Viernes,';
+                    break;
+                case '6':
+                    Dias += 'Sabado,';
+                    break;
+                case '7':
+                    Dias += 'Domingo,';
+                    break;
+            }
+        }
+    }
+    var listDias = Dias.substring(0,Dias.length - 1);
+    if(listDias == ""){
+        Alertas('1','Dias de recordatorio','','');
+    }
+    return listDias;
+}
+
+function MostrarDialog(nombre){
+    switch(nombre){
+        case 'load_dialog':
+            $("#load_dialog").dialog({
+                title:'Cargando',
+                draggable:false,
+                resizable:false,
+                modal:true
+            });
+            break;
+    }
+}
+function CerrarDialog(nombre){
+    switch(nombre){
+        case 'load_dialog':
+            $("#load_dialog").dialog('close');
             break;
     }
 }
