@@ -66,6 +66,7 @@ function selectIMG(){
     return file;
 }
 function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma,diasRecordar){
+    console.log(diasRecordar);
     let array = diasRecordar.split(',');
     var lunes = '<input type="checkbox" name="lunes" id="cbLunes" class="cbDias" disabled>';
     var martes = '<input type="checkbox" name="martes" id="cbMartes" class="cbDias" disabled>';
@@ -253,7 +254,41 @@ function Dias(){
     }
     return listDias;
 }
-
+function Dias_1(){
+    let Dias = "";
+    for(var i= 0; i<8;i++){
+        if($("#cbDia_"+i+"_l").is(':checked')){
+            switch(i.toString()){
+                case '1':
+                    Dias += 'Lunes,';
+                    break;
+                case '2':
+                    Dias += 'Martes,';
+                    break;
+                case '3':
+                    Dias += 'Miercoles,';
+                    break;
+                case '4':
+                    Dias += 'Jueves,';
+                    break;
+                case '5':
+                    Dias += 'Viernes,';
+                    break;
+                case '6':
+                    Dias += 'Sabado,';
+                    break;
+                case '7':
+                    Dias += 'Domingo,';
+                    break;
+            }
+        }
+    }
+    var listDias = Dias.substring(0,Dias.length - 1);
+    if(listDias == ""){
+        Alertas('1','Dias de recordatorio','','');
+    }
+    return listDias;
+}
 function MostrarDialog(nombre){
     switch(nombre){
         case 'load_dialog':

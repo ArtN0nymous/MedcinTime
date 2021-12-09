@@ -357,6 +357,33 @@ function Consultas(id){
                     document.getElementById('fecha_registro').value = doc.data().fecha_regist;
                     $("#img").attr('src',doc.data().url);
                     document.getElementById('url_imagen').value = doc.data().url;
+                    var dias = doc.data().diasRecordar;
+                    var array = dias.split(',');
+                    for(var i in array){
+                        switch(array[i]){
+                            case 'Lunes':
+                                $("#cbDia_1_l").prop('checked','true');
+                                break;
+                            case 'Martes':
+                                $("#cbDia_2_l").prop('checked','true');
+                                break;
+                            case 'Miercoles':
+                                $("#cbDia_3_l").prop('checked','true');
+                                break;
+                            case 'Jueves':
+                                $("#cbDia_4_l").prop('checked','true');
+                                break;
+                            case 'Viernes':
+                                $("#cbDia_5_l").prop('checked','true');
+                                break;
+                            case 'Sabado':
+                                $("#cbDia_6_l").prop('checked','true');
+                                break;
+                            case 'Domingo':
+                                $("#cbDia_7_l").prop('checked','true');
+                                break;
+                        }
+                    }
                 }
             });
         });
@@ -367,12 +394,15 @@ function Consultas(id){
 function Actualizar(){
     var id= $("#med_id").val();
     var url = $("#url_imagen").val();
+    var dias = Dias_1();
+    console.log(dias);
     if(url != "" && id != ""){
-        db.collection("userM_"+user_uid).doc(id).set({
+        db.collection("userM_"+user_uid).doc(id).update({
             medicamento: $("#med_nombre").val(),
             dosis: $("#med_dosis").val(),
             contenido: $("#med_contenido").val(),
             contenido_unidad: $("#med_unidad").val(),
+            diasRecordar:dias,
             fecha_regist: $("#fecha_registro").val(),
             url: url
         })
