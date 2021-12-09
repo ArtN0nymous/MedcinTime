@@ -1,19 +1,29 @@
-
+body{
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+h2{
+    font-size: 2rem;
+}
+i{
+    width: 2rem;
+    height: 2rem;
+}
 a{
 	
 	color: black;
-	font-size: 13px;
+	font-size: 1rem;
 	font-family: Roboto,Helvetica,Arial,sans-serif;
 	margin-top: 0px;
 	text-decoration: none;
 }
 .tarjeta{
-	width: 300px;
-	height: 294px;
+	width: 100%;
+	height: 100%;
 	background: white;
 	border-radius: 10px;
 	border-width: 1px solid;
-	border:1px solid #ccc;; 
+	border:1px solid #ccc;
 }
 
 .tarjeta:hover{
@@ -22,7 +32,7 @@ a{
 }
 
 .cabecera{
-     width: 300px;
+     width: 100%;
      height: 100px;
  
     border-top-right-radius:10px;
@@ -59,7 +69,7 @@ a{
 .nombre{
 	width: 210px;
     font-family: Roboto,Helvetica,Arial,sans-serif;
-	font-size: 13px;
+	font-size: 1rem;
 	
 	color: #fff;
     display: block;
@@ -74,7 +84,7 @@ a{
 
 
 .medio{
- width: 300px;
+ width: 100%;
  height: 137px; 
  border-bottom:1px solid #ccc;
  
@@ -83,8 +93,8 @@ a{
 	padding: 12px 16px 16px ;
 }
 .medio .texto .foto{
-	width: 75px;
-	height: 75px;
+	width: 7.5rem;
+	height: 7.5rem;
 	border-radius: 50%;
     float: right;
     height: 4.6875rem;
@@ -101,7 +111,7 @@ a{
 }
 
 .pie{
- width: 300px;
+ width: 100%;
  height: 57px; 
   border-bottom-right-radius:10px;
  border-bottom-left-radius:10px;
@@ -116,8 +126,15 @@ a{
 }
 
 .pie .icon2{
+	border-radius: 50%;  
+    float: right;
+    width: 40px;
+    height: 40px;   
+    margin-top: 1.09375rem;  
+      
+}
+.pie .icon3{
 	border-radius: 50%;
-    
     float: right;
     width: 40px;
     height: 40px;   
