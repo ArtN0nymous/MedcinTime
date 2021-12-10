@@ -331,11 +331,16 @@ function leerdatos(){
         db.collection("userM_"+usuario).onSnapshot((querySnapshot)=>{
             card.innerHTML = '';
             querySnapshot.forEach((doc)=>{
+                if(doc.data().diasRecordar == "Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo"){
+                    horas = "Cada 8 H.";
+                }else{
+                    horas ="";
+                }
                 newCard(doc.id,'images/card-background/img1.jpg',
                 doc.data().medicamento,
                 doc.data().contenido_unidad + " " + doc.data().dosis_unidad, doc.data().contenido + " " + doc.data().dosis,
                 doc.data().url,
-                doc.data().fecha_regist,doc.data().diasRecordar);
+                doc.data().fecha_regist,doc.data().diasRecordar,horas);
             });
         });
     }

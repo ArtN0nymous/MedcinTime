@@ -65,7 +65,7 @@ function selectIMG(){
     //regresa la uri del archivo original no la del canvas
     return file;
 }
-function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma,diasRecordar){
+function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medImageURL, diaToma,diasRecordar,cada){
     console.log(diasRecordar);
     let array = diasRecordar.split(',');
     var lunes = '<input type="checkbox" name="lunes" id="cbLunes" class="cbDias" disabled>';
@@ -105,7 +105,7 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
                  <div class='tarjeta'>
 				<div class="cabecera" style="background: url(${backgroundImgURL});background-repeat: no-repeat;-webkit-background-size: cover;background-size: cover;">
 					<a class="parte1" href="">
-					<div class="titulo">${cardTitle}</div>				
+					<div class="titulo">${cardTitle} ${cada}</div>				
 					</a>
 					<div class="nombre">Dosis: ${contenidoUnidadDosis} ${dosis}</div>
 				</div>
