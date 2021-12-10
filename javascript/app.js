@@ -107,13 +107,13 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 					<a class="parte1" href="">
 					<div class="titulo">${cardTitle}</div>				
 					</a>
-					<div class="nombre">Dosis: ${contenidoUnidadDosis}${dosis}</div>
+					<div class="nombre">Dosis: ${contenidoUnidadDosis} ${dosis}</div>
 				</div>
 	
 				<div class="medio">				
 					<div class="texto">
 						<img class="foto" src="${medImageURL}" alt="">
-						<h2>Te queda(n) 1 dosis</h2>
+						<h2></h2>
 						<div class="tareas">
 							<a class="link" href="">${diaToma}</a>
                             
@@ -152,10 +152,9 @@ function newCard(id,backgroundImgURL,cardTitle,contenidoUnidadDosis, dosis, medI
 						</div>
 					</div>
 				</div>
-
+    
 				<div class="pie">	
-                    <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>
-					<span class="icon2"><i class="fa fa-arrows-alt fa-2x"></i></span>                   
+                    <span class="icon3" onclick="Borrar('${id}','${medImageURL}');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></span>                 
 					<span class="icon3" onclick="Editar('${id}')"><i class="fa fa-pencil fa-2x"></i></span>
                     
 				</div>
