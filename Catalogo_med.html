@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/floatButton.css">
     <link rel="stylesheet" href="css/newMed.css">
+    <link rel="stylesheet" href="css/editar.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/cards.css">
@@ -25,77 +26,110 @@
             <div class="row" id="tabla_body" style="text-align: center;">
             </div>
             <a href="newMed.html" class="btn-flotante">+</a>
+
+            <div class="modal fade" id="modalEditarMed" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+              <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                  <h1 class="modal-title mx-auto">Editar Medicamento</h1>
+                  </div>
+                  <div class="modal-body">
+                      <section class="form-register">
+                         
+                          <div class="controles">
+
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <label>ID:</label><br>
+                                <input type="text" id="med_id" readonly="true">
+                              </div>
+                              <div class="col-sm-6">
+                                <label>Medicamento:</label><br>
+                                <input class="controls" type="text" name="med_nombre" id="med_nombre">
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <label>Contenido por caja:</label><br>
+                                <input class="controls" type="text" id="med_contenido">
+                              </div>
+                              <div class="col-sm-6">
+                                <label>Contenido por unidad:</label><br>
+                                <input class="controls" type="text" name="med_unidad" id="med_unidad">
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <label>Dosis:</label><br>
+                                <input type="text" id="med_dosis" name="med_dosis">
+                              </div>
+                              <div class="col-sm-6">
+                                <label>Fecha de registro:</label><br>
+                                <input type="text" id="fecha_registro">
+                              </div>
+                              <div class="col-sm-12 pt-3">
+                                <label>Imagen: <input type="checkbox" id="imagen" onchange="Checks('AM')"></label>
+                                <input  type="file" id="file_selector" accept="image/x-png,image/gif,image/jpeg,image/jpg" onchange="subir_img();"><br>
+                                <img id="img" width="250"></img><textarea id="url_imagen" rows="4" readonly="true"></textarea>
+                              </div>
+                            </div>
+                                 
+                        
+                              
+                                  
+                            
+                              <div class="col-lg">
+                                <div class="col-sm-12">
+                                  <h3 class="h3-dias p-4">Modificar los dias de la semana</h3>
+                                </div>                                
+                                
+                                  <div class="row" style="font-size: 1rem;">
+                                      <div class="col">
+                                        <label for="lunes" class="lblDias">Lun</label>
+                                        <input type="checkbox" name="lunes" id="cbDia_1_l" class="cbDias">
+                                      </div>
+                                        <div class="col">
+                                          <label for="martes" class="lblDias">Mar</label>
+                                          <input type="checkbox" name="martes" id="cbDia_2_l" class="cbDias">
+                                        </div>
+                                        <div class="col">
+                                          <label for="miercoles" class="lblDias">Mie</label>
+                                        <input type="checkbox" name="miercoles" id="cbDia_3_l" class="cbDias">
+                                        </div>
+                                        <div class="col">
+                                          <label for="jueves" class="lblDias">Jue</label>
+                                          <input type="checkbox" name="jueves" id="cbDia_4_l" class="cbDias">
+                                        </div>
+                                        <div class="col">
+                                          <label for="viernes" class="lblDias">Vie</label>
+                                          <input type="checkbox" name="viernes" id="cbDia_5_l" class="cbDias">
+                                        </div>
+                                        <div class="col">
+                                          <label for="sabado" class="lblDias">Sab</label>
+                                          <input type="checkbox" name="sabado" id="cbDia_6_l" class="cbDias">
+                                        </div>
+                                        <div class="col">
+                                          <label for="domingo" class="lblDias">Dom</label>
+                                          <input type="checkbox" name="domingo" id="cbDia_7_l" class="cbDias">
+                                        </div>                                                                                                                                                
+                                    </div>
+                              </div>
+                              <br>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal('EditarMed')">Cancelar</button>
+                  <button type="button" class="btn btn-primary modalRegistro" id="btnactualizar" onclick="Actualizar()">Guardar</button>
+                  </div>
+              </div>
+              </div>
+          </div>
     </div>
     <div class="addMedA" style="position: relative; float: right; margin-top: 95vh;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M13.25 2.5H2.75a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25zM2.75 1h10.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 15H2.75A1.75 1.75 0 011 13.25V2.75C1 1.784 1.784 1 2.75 1zM8 4a.75.75 0 01.75.75v2.5h2.5a.75.75 0 010 1.5h-2.5v2.5a.75.75 0 01-1.5 0v-2.5h-2.5a.75.75 0 010-1.5h2.5v-2.5A.75.75 0 018 4z"></path></svg></div>
-    <div class="modal fade" id="modalEditarMed" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title">Medicamento</h1>
-            </div>
-            <div class="modal-body">
-                <section class="form-register">
-                    <h1>Editar Medicamento</h1>
-                    <div class="controles">
-                        <div class="col-lg">
-                            <label>ID:</label><input type="text" id="med_id" readonly="true"><br>
-                            <label>Medicamento:</label><br>
-                            <input class="controls" type="text" name="med_nombre" id="med_nombre"><br>
-                            <label>Contenido por caja:</label><br>
-                            <input class="controls" type="text" id="med_contenido"><br>
-                            <label>Contenido por unidad:</label><br>
-                            <input class="controls" type="text" name="med_unidad" id="med_unidad">
-                            <label>Dosis:</label>
-                            <input type="text" id="med_dosis" name="med_dosis">
-                            <label>Fecha de registro:</label><br>
-                            <input type="text" id="fecha_registro"><br>
-                            <label>Imagen:<input type="checkbox" id="imagen" onchange="Checks('AM')"></label>
-                            <input type="file" id="file_selector" accept="image/x-png,image/gif,image/jpeg,image/jpg" onchange="subir_img();"><br>
-                            <img id="img" width="250"></img><textarea id="url_imagen" rows="4" readonly="true"></textarea>
-                        </div>
-                        <div class="col-lg">
-                            <div class="row">
-                                <div class="col">
-                                  <label for="lunes" class="lblDias">Lun</label>
-                                  <input type="checkbox" name="lunes" id="cbDia_1_l" class="cbDias">
-                                </div>
-                                  <div class="col">
-                                    <label for="martes" class="lblDias">Mar</label>
-                                    <input type="checkbox" name="martes" id="cbDia_2_l" class="cbDias">
-                                  </div>
-                                  <div class="col">
-                                    <label for="miercoles" class="lblDias">Mie</label>
-                                  <input type="checkbox" name="miercoles" id="cbDia_3_l" class="cbDias">
-                                  </div>
-                                  <div class="col">
-                                    <label for="jueves" class="lblDias">Jue</label>
-                                    <input type="checkbox" name="jueves" id="cbDia_4_l" class="cbDias">
-                                  </div>
-                                  <div class="col">
-                                    <label for="viernes" class="lblDias">Vie</label>
-                                    <input type="checkbox" name="viernes" id="cbDia_5_l" class="cbDias">
-                                  </div>
-                                  <div class="col">
-                                    <label for="sabado" class="lblDias">Sab</label>
-                                    <input type="checkbox" name="sabado" id="cbDia_6_l" class="cbDias">
-                                  </div>
-                                  <div class="col">
-                                    <label for="domingo" class="lblDias">Dom</label>
-                                    <input type="checkbox" name="domingo" id="cbDia_7_l" class="cbDias">
-                                  </div>                                                                                                                                                
-                              </div>
-                        </div>
-                        <br>
-                    </div>
-                </section>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary modalRegistro" data-dismiss="modal" onclick="OcultarModal('EditarMed')">Cancelar</button>
-            <button type="button" class="btn btn-outline-success modalRegistro" id="btnactualizar" onclick="Actualizar()">Guardar</button>
-            </div>
-        </div>
-        </div>
-    </div>
+    
     <div class="footerContainer"></div>
     <script src="javascript/main_firebase.js"></script>
     <script src="javascript/LoggedIn.js"></script>
